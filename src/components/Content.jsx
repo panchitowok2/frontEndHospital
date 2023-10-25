@@ -1,14 +1,12 @@
-// Header.js
+// contenido de la pàgina
 import React from 'react';
 
-function Header() {
+function Content() {
   return (
-    <header className='bg-info w-100'>
         <div>
         <h1>Hospital Conrado Villalba</h1>
         </div>
-    </header>
   );
 }
 
-export default Header;
+export default Content;
