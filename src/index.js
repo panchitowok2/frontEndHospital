@@ -8,10 +8,16 @@ import { Auth0Provider } from '@auth0/auth0-react';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
+const onRedirectCallback = (appState) => {
+  // Aquí puedes realizar acciones después de la redirección, como actualizar el estado de autenticación o redirigir a una página específica.
+  console.log("Redirección completada");
+  console.log(appState);
+};
 root.render(    
 <Auth0Provider
     domain="dev-cqsr2j8hnf0nlf0n.us.auth0.com"
     clientId="psvZm9Zg56tguSMq7P65SNkjOgP7abwu"
+    onRedirectCallback={onRedirectCallback}
     authorizationParams={{
       redirect_uri: window.location.origin
     }}

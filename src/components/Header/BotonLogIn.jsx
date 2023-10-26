@@ -8,7 +8,7 @@ function BotonLogIn() {
         loginWithRedirect,
     } = useAuth0();
   return !isAuthenticated && (
-        <button type="button" className='btn btn-lg btn-success mt-4 mb-4 me-4' onClick={loginWithRedirect}>LogIn</button>
+        <button type="button" className='btn btn-lg btn-success mt-4 mb-4 me-4' onClick={() => loginWithRedirect()}>LogIn</button>
   );
 }
 
