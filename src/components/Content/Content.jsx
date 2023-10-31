@@ -3,9 +3,8 @@ import React from 'react';
 import Perfil from '../Perfil/Perfil.jsx'
 function Content() {
   return (
-        <div className="footerSiempreAbajo">
-        <h1>Hospital Conrado Villalba</h1>
-        <Perfil />
+        <div className="footerSiempreAbajo m-3">
+        asdasd <br />
         asdasd <br />
         asdasd <br />
         asdasd <br />
