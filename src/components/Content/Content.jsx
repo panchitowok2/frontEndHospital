@@ -1,36 +1,18 @@
 // contenido de la pàgina
 import React,{ useState, useEffect } from 'react';
-import Perfil from '../Perfil/Perfil.jsx'
-import Formulario from '../Formularios_alta_consulta_dianostico/formulario1.jsx';
-
+import FormularioAltaHistoriaClinica from '../Formulario/Form_Alta_Historia_Clinica.jsx';
+import FormBuscarIdPersona from '../Formulario/Form_Buscar_IDPersona.jsx';
+import FormBuscarHistoriaClinica from '../Formulario/Form_Buscar_Historia_Clinica.jsx';
+import FormAltaPersona from '../Formulario/Form_Alta_Persona.jsx';
 function Content() {
 
 
   return (
         <div className="footerSiempreAbajo m-3">
-        asdasd <br />
-        asdasd <br />
-        asdasd <br />
-        asdasd <br />
-        asdasd <br />
-        asdasd <br />
-        asdasd <br />
-        asdasd <br />
-        asdasd <br />
-        asdasd <br />
-        asdasd <br />
-        asdasd <br />
-        asdasd <br />
-        asdasd <br />
-        asdasd <br />
-        asdasd <br />
-        asdasd <br />
-        asdasd <br />
-        asdasd <br />
-        asdasd <br />
-        Final <br />
-        <Formulario />
-
+        <FormularioAltaHistoriaClinica />
+        <FormBuscarIdPersona />
+        <FormBuscarHistoriaClinica />
+        <FormAltaPersona />
         </div>
   );
 }

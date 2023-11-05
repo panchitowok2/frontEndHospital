@@ -14,18 +14,18 @@ function Header() {
   } = useAuth0();
 
   return (
-    <nav class="navbar navbar-expand-md bg-primary shadow">
-      <div class="container-fluid">
-      <a class="navbar-brand" href="#"> <img src={logoHospital} width="100" class="d-inline-block"/>
+    <nav className="navbar navbar-expand-md bg-primary shadow">
+      <div className="container-fluid">
+      <a className="navbar-brand" href="#"> <img src={logoHospital} width="100" className="d-inline-block"/>
         Hospital C. Villalba
       </a>
         {/*  boton hamburguesa */}
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
+        <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span className="navbar-toggler-icon"></span>
         </button>
 
-        <div class="collapse navbar-collapse ms-5" id="navbarSupportedContent">
-          <ul class="navbar-nav">
+        <div className="collapse navbar-collapse ms-5" id="navbarSupportedContent">
+          <ul className="navbar-nav">
             {isAuthenticated ? (
               <React.Fragment>
                 <li className="nav-item">
@@ -62,8 +62,8 @@ function Header() {
           </div>
 
           {/* menu para pantallas chicas */}
-          <div class="d-md-none">
-            <ul class="navbar-nav">
+          <div className="d-md-none">
+            <ul className="navbar-nav">
             {isAuthenticated ? (
               <li className="nav-item">
                 <a className="nav-link text-white" onClick={() => logout({ logoutParams: { returnTo: window.location.origin } })}> Cerrar sesión </a>
