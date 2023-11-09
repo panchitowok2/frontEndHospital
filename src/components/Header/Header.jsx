@@ -36,6 +36,7 @@ function Header() {
                   <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
                     <li><Link to="/paciente/alta_persona" className='dropdown-item'>Alta Persona</Link></li>
                     <li><Link to="/paciente/buscar_persona" className='dropdown-item'>Buscar Persona</Link></li>
+                    <li><Link to="/paciente/informe_paciente" className='dropdown-item'>Informe de paciente</Link></li>
                   </ul>
                 </li>
                 <li className="nav-item dropdown">

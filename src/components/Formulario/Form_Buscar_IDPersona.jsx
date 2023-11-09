@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-
-const FormBuscarIdPersona = () => {
+import Error_General from './Error_General';
+const FormBuscarIdPersona = ({ onSuccess, onError }) => {
     const { register, formState: { errors }, handleSubmit } = useForm();
     const [responseData, setResponseData] = useState(null);
+    const [errorsTransaction, setErrors] = useState([]);
     //metodo para obtener el id de la persona
     const onSubmit = async (data) => {
         try {
@@ -14,15 +15,20 @@ const FormBuscarIdPersona = () => {
                 },
                 body: JSON.stringify(data) // asegúrate de que los datos estén en el formato adecuado
             });
+            const idPersona = await response.json();
             if (!response.ok) {
-                throw new Error('Hubo un problema al procesar la solicitud');
+                console.log('la respuesta es:')
+                console.log(JSON.stringify(idPersona))
+                throw new Error(idPersona.message);
             }
-            const idPersona = await response.json(); // o response.text() si la respuesta no es JSON
+
+            onSuccess(idPersona)
             await obtenerDatos(idPersona);
-        } catch (error) {
+        } catch (err) {
             // Aquí puedes manejar errores de la solicitud
-            console.error('Error:', error);
-            setResponseData({ 'Error': 'La persona no pudo ser encontrada.' })
+            console.error('Error:', err);
+            setErrors([err.message])
+            onError(err.message)
         }
     };
     //metodo para obtener los datos de la persona
@@ -42,14 +48,16 @@ const FormBuscarIdPersona = () => {
             const respuesta = await response.json(); // o response.text() si la respuesta no es JSON
             // Aquí puedes manejar la respuesta del servidor si es necesario
             setResponseData(respuesta);
-        } catch (error) {
+        } catch (err) {
             // Aquí puedes manejar errores de la solicitud
-            console.error('Error:', error);
+            console.error('Error:', err);
+            setErrors([err.message])
             setResponseData({ 'Error': 'La persona no pudo ser encontrada.' })
         }
     };
     const resetForm = () => {
         setResponseData(null);
+        setErrors([])
     };
     //metodo para quitar las claves que no deseeamos que se vean en el front
     const removeUnwantedKeys = (obj) => {
@@ -83,42 +91,40 @@ const FormBuscarIdPersona = () => {
                 </div>
 
             ) : (
-                <form onSubmit={handleSubmit(onSubmit)}>
-                    <div>
-                        <label>Apellido</label>
-                        <input type="text" {...register("apellido", {
-                            required: true,
-                            maxLength: 15
-                        })} />
-                        {errors.apellido?.type === "required" && <p>El apellido es requerido</p>}
+                <div>
+                <Error_General errors={errorsTransaction}/>
+                <form onSubmit={handleSubmit(onSubmit)} className="p-5 bg-light rounded">
+                    <div className="mb-3">
+                        <label className="form-label">Apellido</label>
+                        <input type="text" {...register("apellido", { required: true, maxLength: 15 })} className="form-control" />
+                        {errors.apellido?.type === "required" && <p className="text-danger">El apellido es requerido</p>}
                     </div>
-                    <div>
-                        <label>Tipo Documento</label>
+                    <div className="mb-3">
+                        <label className="form-label">Tipo Documento</label>
                         <select className="form-select" {...register("tipo_documento")}>
                             <option value='DNI'>DNI</option>
                             <option value='LI'>LI</option>
                             <option value='LE'>LE</option>
                         </select>
                     </div>
-                    <div>
-                        <label>Nùmero Documento</label>
-                        <input type="text" {...register("documento", {
-                            required: true,
-                            maxLength: 9
-                        })} />
-                        {errors.numero_documento?.type === "required" && <p>El numero de documento es requerido</p>}
+                    <div className="mb-3">
+                        <label className="form-label">Número Documento</label>
+                        <input type="text" {...register("documento", { required: true, maxLength: 9 })} className="form-control" />
+                        {errors.numero_documento?.type === "required" && <p className="text-danger">El número de documento es requerido</p>}
                     </div>
-                    <div>
-                        <label>Sexo</label>
+                    <div className="mb-3">
+                        <label className="form-label">Sexo</label>
                         <select className="form-select" {...register("sexo")}>
                             <option value='M'>M</option>
                             <option value='F'>F</option>
                         </select>
                     </div>
-                    <button className="btn btn-primary" type="button submit">
-                        Enviar
-                    </button>
+                    <div className="d-flex justify-content-end">
+                        <button className="btn btn-primary mt-3" type="submit">Enviar</button>
+                    </div>
                 </form>
+
+                </div>
             )}
         </div>
     );
