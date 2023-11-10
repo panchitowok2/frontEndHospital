@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { buscarPersona } from '../../funcionesJS/funciones_persona.js';
+import buscarPersona, { buscarDatosPersona } from '../../funcionesJS/funciones_persona.js';
+import { buscarDatosHistoriaClinica } from '../../funcionesJS/funciones_historia_clinica.js';
 
 const Buscar_Persona = ({ state }) => {
   const { 
@@ -7,93 +8,97 @@ const Buscar_Persona = ({ state }) => {
     setTipoDocumento, 
     documento, 
     setDocumento,
+    apellido,
+    setApellido,
     sexo,
     setSexo,
     setErrors,
-    setPersona
+    setPersona,
+    setBuscandoPersona,
+    setHistoriaClinica
   } = state;
 
-  const [buscandoPersona, setBuscandoPersona] = useState(false);
 
   let handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
+      setPersona("")
+      setHistoriaClinica("")
+      setErrors([])
+
       setBuscandoPersona(true);
-      const personaEncontrada = await buscarPersona(tipoDocumento, documento, sexo);
+      
+      const idPersona = await buscarPersona(tipoDocumento, documento, apellido, sexo);
+      const personaEncontrada = await buscarDatosPersona(idPersona);
       setPersona(personaEncontrada)
 
-      setErrors([])
+      const historia_clinica = await buscarDatosHistoriaClinica(personaEncontrada.historia_clinica)
+      setHistoriaClinica(historia_clinica)
+      
     } catch (err) {
       setErrors([err.message])
+      setPersona("")
     }
 
     setTimeout(() => {
       setBuscandoPersona(false);
-    }, 1000); // 3000 milisegundos (3 segundos)
+    }, 3000); // 3000 milisegundos (3 segundos)
   }
 
   return(
     <form  onSubmit={handleSubmit}>
-      <div class="row">
-        <div class="col-md-6"> 
-          <div class="form-floating">
-            <select class="form-select" id="tipoDocumento" aria-label="Floating label select example" onChange={(e) => setTipoDocumento(e.target.value)} required>
+      <div className="row">
+        <div className="col-md-6"> 
+          <div className="form-floating">
+            <select className="form-select" id="tipoDocumento" aria-label="Floating label select example" onChange={(e) => setTipoDocumento(e.target.value)} required>
               <option value=""> Seleccione una opción </option>
               <option value="DNI">DNI - Documento Nacional de Identidad</option>
               <option value="LI">LC - Libreta Cívica</option>
               <option value="LE">LE - Libreta de Enrolamiento</option>
             </select>
-            <label for="tipoDocumento">Tipo de documento</label>
+            <label htmlFor="tipoDocumento">Tipo de documento</label>
           </div>
         </div>
 
-        <div class="col-md-6">
-          <div class="form-floating mb-3">
-            <input type="number" class="form-control" id="documento" onChange={(e) => setDocumento(e.target.value)} required/>
-            <label for="documento">Número de documento</label>
+        <div className="col-md-6 mt-0 mt-3 mt-md-0">
+          <div className="form-floating mb-3">
+            <input type="number" className="form-control" id="documento" onChange={(e) => setDocumento(e.target.value)} required/>
+            <label htmlFor="documento">Número de documento</label>
           </div>
         </div>
       </div>
       
-      <div class="row">
-        <div class="col-md-12">
-          <p class="mb-1"> Sexo: </p>
+      <div className="row">
+        <div className="col-md-6">
+          <div className="form-floating mb-3">
+            <input type="text" className="form-control" id="apellido" onChange={(e) => setApellido(e.target.value)} required/>
+            <label htmlFor="apellido"> Apellido </label>
+          </div>
+        </div>
+
+        <div className="col-md-auto">
+          <p className="mb-1"> Sexo: </p>
           
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="sexo" id="sexoFemenino" value="F" onChange={(e) => setSexo(e.target.value)} required />
-            <label class="form-check-label" for="sexoFemenino">
+          <div className="form-check form-check-inline">
+            <input className="form-check-input" type="radio" name="sexo" id="sexoFemenino" value="F" onChange={(e) => setSexo(e.target.value)} required />
+            <label className="form-check-label" htmlFor="sexoFemenino">
               Femenino
             </label>
           </div>
 
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="sexo" id="sexoMasculino" value="M" onChange={(e) => setSexo(e.target.value)} required />
-            <label class="form-check-label" for="sexoMasculino">
+          <div className="form-check form-check-inline">
+            <input className="form-check-input" type="radio" name="sexo" id="sexoMasculino" value="M" onChange={(e) => setSexo(e.target.value)} required />
+            <label className="form-check-label" htmlFor="sexoMasculino">
               Masculino
             </label>
           </div>
         </div>
 
-        <div class="col-md-auto mt-3">
-          <button type="submit" class="btn btn-primary"> Buscar persona </button>
+        <div class="col-md mt-3">
+          <button type="submit" class="btn btn-primary float-end"> Buscar persona </button>
         </div>
 
-        {buscandoPersona && 
-        <div class="col-md mt-4">
-          <div class="spinner-grow text-primary spinner-grow-sm ms-0" role="status">
-            <span class="visually-hidden">Loading...</span>
-          </div>
-
-          <div class="spinner-grow text-primary spinner-grow-sm ms-2" role="status">
-            <span class="visually-hidden">Loading...</span>
-          </div>
-
-          <div class="spinner-grow text-primary spinner-grow-sm ms-2" role="status">
-            <span class="visually-hidden">Loading...</span>
-          </div>
-        </div>
-        }
       </div>
     </form>
   )
