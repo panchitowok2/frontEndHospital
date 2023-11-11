@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 import buscarPersona, { buscarDatosPersona } from '../../funcionesJS/funciones_persona.js';
 import { buscarDatosHistoriaClinica } from '../../funcionesJS/funciones_historia_clinica.js';
 
@@ -13,6 +13,7 @@ const Buscar_Persona = ({ state }) => {
     sexo,
     setSexo,
     setErrors,
+    persona,
     setPersona,
     setBuscandoPersona,
     setHistoriaClinica
@@ -32,9 +33,6 @@ const Buscar_Persona = ({ state }) => {
       const idPersona = await buscarPersona(tipoDocumento, documento, apellido, sexo);
       const personaEncontrada = await buscarDatosPersona(idPersona);
       setPersona(personaEncontrada)
-
-      const historia_clinica = await buscarDatosHistoriaClinica(personaEncontrada.historia_clinica)
-      setHistoriaClinica(historia_clinica)
       
     } catch (err) {
       setErrors([err.message])
@@ -45,6 +43,21 @@ const Buscar_Persona = ({ state }) => {
       setBuscandoPersona(false);
     }, 3000); // 3000 milisegundos (3 segundos)
   }
+
+  useEffect(() => {
+    if (!persona) return;
+    
+    const fetchHistoriaClinica = async () => {
+      try {
+          const historia_clinica = await buscarDatosHistoriaClinica(persona.historia_clinica)
+        setHistoriaClinica(historia_clinica)
+      } catch (err) {
+        setErrors([err.message])
+      }
+    };
+  
+    fetchHistoriaClinica();
+  }, [persona]); 
 
   return(
     <form  onSubmit={handleSubmit}>

@@ -3,6 +3,7 @@ import { useAuth0 } from '@auth0/auth0-react';
 import Buscar_Persona from '../Persona/Buscar_Persona';
 import Ficha_Paciente from './Ficha_Paciente';
 import Seleccion_Diagnostico from './Seleccion_Diagnostico';
+import Datos_Tratamiento from './Datos_Tratamiento';
 import Error_General from '../Errores/Error_General';
 
 const Formulario_Alta_Tratamiento_Farmacologico = () => {  
@@ -17,14 +18,17 @@ const Formulario_Alta_Tratamiento_Farmacologico = () => {
   const [historiaClinica, setHistoriaClinica] = useState("");
 
   const [diagnostico, setDiagnostico] = useState("");
-  const [diagnosticos, setDiagnosticos] = useState([]);
-
-  const [consulta, setConsulta] = useState("");
-  const [enfermedad, setEnfermedad] = useState("");
+  
 
   const [medico, setMedico] = useState("");
 
   const [buscandoPersona, setBuscandoPersona] = useState(false);
+
+  const [tipo, setTipo] = useState("");
+  const [descripcion, setDescripcion] = useState("");
+  const [fechaInicio, setFechaInicio] = useState("");
+  const [duracion, setDuracion] = useState("");
+  const [dosificaciones, setDosificaciones] = useState([]);
 
   const personaState = {
     tipoDocumento,
@@ -47,19 +51,27 @@ const Formulario_Alta_Tratamiento_Farmacologico = () => {
   const diagnosticoState = {
     diagnostico,
     setDiagnostico,
-    diagnosticos,
-    setDiagnosticos,
-    consulta,
-    setConsulta,
-    enfermedad,
-    setEnfermedad,
     medico,
     setMedico,
-    historiaClinica
+    historiaClinica,
+    setErrors,
   }
 
-  const onSubmit = (data) => {
-    console.log(data);
+  const tratamientoState = {
+    tipo,
+    setTipo,
+    descripcion,
+    setDescripcion,
+    fechaInicio,
+    setFechaInicio,
+    duracion,
+    setDuracion,
+    dosificaciones,
+    setDosificaciones,
+    historiaClinica,
+    diagnostico,
+    medico,
+    setErrors
   }
 
   const {
@@ -115,7 +127,7 @@ const Formulario_Alta_Tratamiento_Farmacologico = () => {
               </h2>
               <div id="collapseThree" className="accordion-collapse collapse" aria-labelledby="headingThree">
                 <div className="accordion-body">
-                  <strong>This is the third item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                  <Datos_Tratamiento state={tratamientoState} />
                 </div>
               </div>
             </div>
@@ -125,11 +137,6 @@ const Formulario_Alta_Tratamiento_Farmacologico = () => {
 
         <Ficha_Paciente state={personaState} />
       </div>
-
-      <form onSubmit={onSubmit}>
-
-        <input type="submit" className="btn btn-primary mt-3" value="Registrar nuevo tratamiento" />
-      </form>
     </div>
   )
 

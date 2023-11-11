@@ -1,26 +1,28 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { obtenerDatosDiagnostico } from '../../funcionesJS/funciones_diagnosticos.js';
 import { obtenerConsulta } from '../../funcionesJS/funciones_consultas.js';
 import { obtenerEnfermedad } from '../../funcionesJS/funciones_enfermedades.js';
 import { obtenerMedico } from '../../funcionesJS/funciones_medicos.js';
+import { obtenerEspecialidad } from '../../funcionesJS/funciones_especialidades.js';
+
+import moment from 'moment';
 
 const Seleccion_Diagnostico = ({ state }) => {
 
   const { 
     diagnostico,
     setDiagnostico,
-    diagnosticos,
-    setDiagnosticos,
     historiaClinica,
-    consulta,
-    setConsulta,
-    enfermedad,
-    setEnfermedad,
     medico,
     setMedico,
     setErrors
   } = state;
+
+  const [diagnosticos, setDiagnosticos] = useState([]);
+  const [consulta, setConsulta] = useState("");
+  const [enfermedad, setEnfermedad] = useState("");
+  const [especialidades, setEspecialidades] = useState([]);
 
   function seleccionarDiagnostico(idDiagnostico) {
     const loadData = async () => {
@@ -33,9 +35,7 @@ const Seleccion_Diagnostico = ({ state }) => {
           setErrors([err.message]);
         } 
       } else {
-        setConsulta("")
-        setEnfermedad("")
-        setMedico("")
+        setDiagnostico("")
       }
     };
 
@@ -126,6 +126,30 @@ const Seleccion_Diagnostico = ({ state }) => {
     fetchMedico();
   }, [consulta]); 
 
+  useEffect(() => {
+    const fetchEspecialidades = async () => {
+      if (medico) {
+        try {
+          var listaEspecialidades = [];
+
+          for (const especialidadMedica of medico.especialidades) {
+            const especialidadBuscada = await obtenerEspecialidad(especialidadMedica);
+            listaEspecialidades.push(especialidadBuscada);
+          }
+  
+          setEspecialidades(listaEspecialidades);
+
+        } catch (err) {
+          setErrors([err.message])
+        }
+      } else {
+        setEspecialidades([])
+      }
+    };
+  
+    fetchEspecialidades();
+  }, [medico]); 
+
   return(
      <div>
         <p> Por favor: seleccione el diagnostico por el cual va realizar el tratamiento:</p>
@@ -152,7 +176,7 @@ const Seleccion_Diagnostico = ({ state }) => {
             <h3> Consulta </h3>
             <p><strong>Síntomas:</strong> {consulta.sintomas}</p>
             <p><strong>Observación:</strong> {consulta.observacion}</p>
-            <p><strong>Fecha y Hora:</strong> {consulta.fecha_y_hora}</p>
+            <p><strong>Fecha y Hora:</strong> {consulta.fecha_y_hora && moment(consulta.fecha_y_hora).format('DD/MM/YYYY HH:mm')} </p>
           </div>
 
           <div className="col-md mt-3">
@@ -165,7 +189,10 @@ const Seleccion_Diagnostico = ({ state }) => {
             <h3> Medico </h3>
             <p><strong> Nombre: </strong> {medico.nombre} {medico.apellido} </p>
             <p><strong> Legajo: </strong> {medico.legajo} </p>
-            <p><strong> Especialidad: </strong> {medico.especialidades} </p>
+            <p><strong> Especialidad: </strong> </p>
+            {especialidades.map((elemEspecialidad) => (
+                  <li key={elemEspecialidad._id}> {elemEspecialidad.nombre} </li>
+            ))}
           </div>
         </div>
      </div>
