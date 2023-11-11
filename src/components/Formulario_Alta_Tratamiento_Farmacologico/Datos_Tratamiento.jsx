@@ -241,7 +241,7 @@ const Datos_Tratamiento = ({ state }) => {
 
               {dosificaciones.length === 0 && 
                 <tr>
-                  <td colspan="5" className="text-danger"> No cargó ninguna dosificación por el momento. Utilice el formulario de arriba para cargar una dosificación. </td>
+                  <td colSpan="5" className="text-danger"> No cargó ninguna dosificación por el momento. Utilice el formulario de arriba para cargar una dosificación. </td>
                 </tr>
               }
             </tbody>
