@@ -5,10 +5,12 @@ import Ficha_Paciente from './Ficha_Paciente';
 import Seleccion_Diagnostico from './Seleccion_Diagnostico';
 import Datos_Tratamiento from './Datos_Tratamiento';
 import Error_General from '../Errores/Error_General';
+import Mensajes_Exito from '../Mensajes_Exito/Mensajes_Exito';
 
 const Formulario_Alta_Tratamiento_Farmacologico = () => {  
   const [errors, setErrors] = useState([]);
-  
+  const [messages, setMessages] = useState([]);
+
   const [tipoDocumento, setTipoDocumento] = useState("");
   const [documento, setDocumento] = useState("");
   const [apellido, setApellido] = useState("");
@@ -71,7 +73,8 @@ const Formulario_Alta_Tratamiento_Farmacologico = () => {
     historiaClinica,
     diagnostico,
     medico,
-    setErrors
+    setErrors,
+    setMessages
   }
 
   const {
@@ -84,12 +87,13 @@ const Formulario_Alta_Tratamiento_Farmacologico = () => {
   
   return(
     <div>
+      <Mensajes_Exito messages={messages} />
       <Error_General errors={errors} />
 
-      <h1 className="fs-2 mb-3"> Alta de Tratamiento Farmacológico</h1>
+      <h1 className="fs-2"> <i class="bi bi-heart-pulse"></i> Alta de Tratamiento Farmacológico</h1>
 
       <div className="row">
-        <div className="col-md">
+        <div className="col-md mt-3">
           <div className="accordion" id="accordionExample">
             <div className="accordion-item">
               <h2 className="accordion-header" id="headingOne">
@@ -101,6 +105,10 @@ const Formulario_Alta_Tratamiento_Farmacologico = () => {
               <div id="collapseOne" className="accordion-collapse collapse show" aria-labelledby="headingOne">
                 <div className="accordion-body">
                   <Buscar_Persona state={personaState} />
+
+                  <div className="d-md-none mt-3">
+                    <Ficha_Paciente state={personaState} />
+                  </div>
                 </div>
               </div>
             </div>
@@ -135,7 +143,9 @@ const Formulario_Alta_Tratamiento_Farmacologico = () => {
           </div>  
         </div>
 
-        <Ficha_Paciente state={personaState} />
+        <div className="col-md-3 mt-3 d-none d-md-block ms-auto">
+          <Ficha_Paciente state={personaState} />
+        </div>
       </div>
     </div>
   )

@@ -108,8 +108,8 @@ const Buscar_Persona = ({ state }) => {
           </div>
         </div>
 
-        <div class="col-md mt-3">
-          <button type="submit" class="btn btn-primary float-end"> Buscar persona </button>
+        <div class="col-md mt-3 text-md-end text-center">
+          <button type="submit" className="btn btn-primary"> Buscar persona </button>
         </div>
 
       </div>

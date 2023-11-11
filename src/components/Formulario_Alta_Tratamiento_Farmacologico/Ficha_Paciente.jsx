@@ -12,7 +12,7 @@ const Ficha_Paciente = ({ state }) => {
 
   return(
       ! buscandoPersona ? (
-        <div className="col-md-3">
+        <div>
           <div className="card">
             <div className="card-header">
               Ficha del paciente
@@ -60,7 +60,7 @@ const Ficha_Paciente = ({ state }) => {
           </div>
         </div>
       ) : (
-          <div className="col-md-3 d-flex align-items-center justify-content-center">
+          <div className="d-flex align-items-center justify-content-center p-5">
             <div className="spinner-grow text-primary spinner-grow-sm ms-0" role="status">
               <span className="visually-hidden">Loading...</span> 
             </div>

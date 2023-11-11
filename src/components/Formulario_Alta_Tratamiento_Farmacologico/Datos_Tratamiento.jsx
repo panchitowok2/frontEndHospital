@@ -8,6 +8,8 @@ const Datos_Tratamiento = ({ state }) => {
   const [dosis, setDosis] = useState([]);
   const [medicamento, setMedicamento] = useState([]);
   const [medicamentos, setMedicamentos] = useState([]);
+  const [success, setSuccess] = useState(false);
+
 
   const { 
     historiaClinica,
@@ -23,7 +25,8 @@ const Datos_Tratamiento = ({ state }) => {
     setDuracion,
     dosificaciones,
     setDosificaciones,
-    setErrors
+    setErrors,
+    setMessages,
   } = state;
 
   const agregarDosificacion = () => {
@@ -51,30 +54,17 @@ const Datos_Tratamiento = ({ state }) => {
     fetchMedicamento();
   };
 
-  const eliminarDosificacion = () => {
-    const fetchMedicamento = async () => {
-      try {
-        const medicamentoSeleccionado = await obtenerMedicamento(medicamento);
-
-        var listadoDosificaciones = dosificaciones;
-        listadoDosificaciones.push({dosis: dosis, medicamento: medicamentoSeleccionado})
-        setDosificaciones(listadoDosificaciones)
-
-        setMedicamento("")
-        setDosis("")
-
-      } catch (err) {
-        setErrors([err.message])
-      }
-    };
-
-    fetchMedicamento();
+  const eliminarDosificacion = (position) => {
+    var listadoDosificaciones = dosificaciones;
+    listadoDosificaciones.splice(position, 1);
+    setDosificaciones(listadoDosificaciones)
   };
 
   const onSubmit = (e) => {
     e.preventDefault();
 
     setErrors([])
+    setSuccess(false)
 
     const fetchAltaTratamiento = async () => {
       try {
@@ -102,9 +92,10 @@ const Datos_Tratamiento = ({ state }) => {
           })
         })
 
-
         const nuevoTratamiento = await altaTratamientoFarmacologico(tipo, descripcion, fechaInicio, duracion, historiaClinica._id, diagnostico._id, medico._id, arrayDosificaciones);
         console.log(nuevoTratamiento)
+        setSuccess(true);
+        setMessages(['Tratamiento creado exitosamente.'])
       } catch (err) {
         setErrors([err.message])
       }
@@ -127,6 +118,11 @@ const Datos_Tratamiento = ({ state }) => {
   }, []); 
 
   useEffect(() => {
+    setSuccess(false)
+    setDosificaciones([])
+  }, [historiaClinica, diagnostico]); 
+
+  useEffect(() => {
     // Función para obtener la fecha actual en formato YYYY-MM-DD
     const obtenerFechaActual = () => {
       const fechaActual = new Date();
@@ -142,7 +138,7 @@ const Datos_Tratamiento = ({ state }) => {
 
   return (
     <div>
-      <h3> Registro médico </h3>
+      <h3> <i class="bi bi-clipboard2-pulse"></i> Registro médico </h3>
 
       <form onSubmit={onSubmit}>
         <div className="form-floating mt-3">
@@ -174,12 +170,12 @@ const Datos_Tratamiento = ({ state }) => {
 
         
 
-        <h3 className="mt-5"> Nueva dosificacion </h3>
+        <h3 className="mt-5"> <i class="bi bi-prescription2"></i> Nueva dosificacion </h3>
         <div className="row mt-3"> 
-          <div className="col-md-5">
+          <div className="col-md-5 mt-2">
             <div className="form-floating">
-              <select className="form-select" id="medicamento" aria-label="Floating label select example" onChange={(e) => setMedicamento(e.target.value)}>
-                <option value="" selected={!medicamento}>
+              <select value={medicamento ? medicamento._id : ""} className="form-select" id="medicamento" aria-label="Floating label select example" onChange={(e) => setMedicamento(e.target.value)}>
+                <option key="" value="">
                   Seleccione una opción
                 </option>
 
@@ -187,7 +183,6 @@ const Datos_Tratamiento = ({ state }) => {
                   <option
                     key={elemMedicamento._id}
                     value={elemMedicamento._id}
-                    selected={elemMedicamento._id === medicamento._id}
                   >
                     {`${elemMedicamento.presentacion} de ${elemMedicamento.droga} - Marca: ${elemMedicamento.nombre}`}
                   </option>
@@ -199,57 +194,65 @@ const Datos_Tratamiento = ({ state }) => {
             </div>
           </div>
 
-          <div className="col-md-4">
+          <div className="col-md-4 mt-2">
             <div className="form-floating">
               <input type="text" className="form-control" id="dosis" value={dosis} onChange={(e) => setDosis(e.target.value)}/>
               <label htmlFor="dosis"> Dosis </label>
             </div>
           </div>
 
-          <div className="col-md-3 d-flex align-items-center justify-content-center">
+          <div className="col-md-3 d-flex align-items-center justify-content-center mt-3">
             <button type="button" className="btn btn-primary" onClick={agregarDosificacion}>
               Agregar dosificación
             </button>
           </div>
         </div>
 
-
-        <table class="table table-striped mt-3">
-          <thead>
-            <tr>
-              <th scope="col">Dosis</th>
-              <th scope="col">Medicamento</th>
-              <th scope="col">Droga</th>
-              <th scope="col">Presentacion</th>
-              <th scope="col" className="text-end">Acciones</th>
-            </tr>
-          </thead>
-
-          <tbody>
-            {dosificaciones.map((elemDosificacion) => (
+        <div class="table-responsive">
+          <table className="table table-striped mt-3">
+            <thead>
               <tr>
-                <td> {elemDosificacion.dosis} </td>
-                <td> {elemDosificacion.medicamento.nombre}</td>
-                <td> {elemDosificacion.medicamento.droga}</td>
-                <td> {elemDosificacion.medicamento.presentacion}</td>
-                <td className="text-end"> 
-                  <button type="button" className="btn btn-primary btn-sm" onClick={eliminarDosificacion}>
-                    Eliminar
-                  </button> 
-                </td>
+                <th scope="col">Dosis</th>
+                <th scope="col">Medicamento</th>
+                <th scope="col">Droga</th>
+                <th scope="col">Presentacion</th>
+                <th scope="col" className="text-end">Acciones</th>
               </tr>
-            ))}
-            
-          </tbody>
-        </table>
+            </thead>
+
+            <tbody>
+              {dosificaciones.map((elemDosificacion, index) => (
+                <tr key={index}>
+                  <td>{elemDosificacion.dosis}</td>
+                  <td>{elemDosificacion.medicamento.nombre}</td>
+                  <td>{elemDosificacion.medicamento.droga}</td>
+                  <td>{elemDosificacion.medicamento.presentacion}</td>
+                  <td className="text-end">
+                    <button
+                      type="button"
+                      className="btn btn-primary btn-sm"
+                      onClick={() => eliminarDosificacion(index)}
+                    >
+                      Eliminar
+                    </button>
+                  </td>
+                </tr>
+              ))}
+
+              {dosificaciones.length === 0 && 
+                <tr>
+                  <td colspan="5" className="text-danger"> No cargó ninguna dosificación por el momento. Utilice el formulario de arriba para cargar una dosificación. </td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
 
         <div className="row mt-5">
-          <div className="col">
-                <input
-                  type="submit"
-                  className={`btn btn-primary mt-3 float-end`}
-                  value="Registrar nuevo tratamiento"
-                />
+          <div className="col text-end">
+            <div> <input type="submit" className="btn btn-primary mt-3" value="Registrar nuevo tratamiento" /> </div>
+            
+            {success && <p className="text-success float-end mt-3"> Bien hecho! Tratamiento creado con éxito.  </p>}
           </div>
         </div>
       </form>
