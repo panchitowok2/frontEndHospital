@@ -28,5 +28,54 @@ const obtenerMedicamentosMasRecetados = async (especialidad, fechaInicio, fechaF
   }
 };
 
+const obtenerMedicamentos = async () => {
+  try {
+    const url = `http://localhost:4000/api/medicamentos`;
+
+    const response = await fetch(url, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.message || 'No se pudo obtener los medicamentos');
+    }
+
+    return data;
+  } catch (error) {
+    console.error('Error al obtener los medicamentos:', error.message);
+    throw error;
+  }
+};
+
+const obtenerMedicamento = async (id) => {
+  try {
+    const url = `http://localhost:4000/api/medicamentos/${id}`;
+
+    const response = await fetch(url, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.message || 'No se pudo obtener los datos del medicamento');
+    }
+
+    return data;
+  } catch (error) {
+    console.error('Error al obtener los datos del medicamento:', error.message);
+    throw error;
+  }
+};
+
 export default obtenerMedicamentosMasRecetados;
+export { obtenerMedicamentos, obtenerMedicamento }
 

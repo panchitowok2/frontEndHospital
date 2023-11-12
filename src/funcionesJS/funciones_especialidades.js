@@ -23,6 +23,28 @@ const obtenerEspecialidades = async () => {
     throw error;
   }
 };
+const obtenerEspecialidad = async (id) => {
+  try {
+    const url = `http://localhost:4000/api/especialidades/${id}`;
 
-export default obtenerEspecialidades;
+    const response = await fetch(url, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.message || 'No se pudo obtener la especialidad');
+    }
+
+    return data;
+  } catch (error) {
+    console.error('Error al obtener la especialidad:', error.message);
+    throw error;
+  }
+};
+export {obtenerEspecialidades,obtenerEspecialidad};
 
