@@ -1,6 +1,6 @@
 const altaTratamientoFarmacologico = async (tipo, descripcion, fecha_inicio, duracion, historia_clinica_id, diagnostico_id, medico_id, dosificaciones) => {
   try {
-    const url = 'http://localhost:4000/api/altaTratamientoFarmacologico';
+    const url = 'http://localhost:4000/api/tratamientos_farmacologicos';
     const params = { 
       "tipo": tipo,
       "descripcion": descripcion,
