@@ -1,6 +1,6 @@
 const obtenerMedicamentosMasRecetados = async (especialidad, fechaInicio, fechaFin) => {  
   try {
-    const url = 'http://localhost:4000/api/buscarMedicamentosMasRecetados';
+    const url = 'http://localhost:4000/api/medicamentos/buscarMedicamentosMasRecetados';
     const params = { 
       "especialidad": especialidad,
       "fecha_inicio": fechaInicio,
@@ -76,6 +76,6 @@ const obtenerMedicamento = async (id) => {
   }
 };
 
-export default obtenerMedicamentosMasRecetados;
-export { obtenerMedicamentos, obtenerMedicamento }
+
+export { obtenerMedicamentos, obtenerMedicamento , obtenerMedicamentosMasRecetados}
 

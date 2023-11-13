@@ -1,4 +1,4 @@
-const obtenerEnfermedades = async () => {
+const obtener_enfermedades = async () => {
   try {
     const response = await fetch('http://localhost:4000/api/obtener_enfermedades');
     const data = await response.json();
@@ -38,6 +38,6 @@ const obtenerEnfermedad = async (id) => {
   }
 };
 
-export { obtenerEnfermedad, obtenerEnfermedades }
+export { obtenerEnfermedad, obtener_enfermedades }
 
 

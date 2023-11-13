@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import obtenerEspecialidades from '../../funcionesJS/funciones_especialidades.js';
-import obtenerMedicamentosMasRecetados from '../../funcionesJS/funciones_medicamentos.js';
+import {obtenerEspecialidades} from '../../funcionesJS/funciones_especialidades.js';
+import {obtenerMedicamentosMasRecetados} from '../../funcionesJS/funciones_medicamentos.js';
 import { useAuth0 } from '@auth0/auth0-react';
 import TablaMedicamentosMasRecetados from './TablaMedicamentosMasRecetados'
 import GraficoMedicamentosMasRecetados from './GraficoMedicamentosMasRecetados'
