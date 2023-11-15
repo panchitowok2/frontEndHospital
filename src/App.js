@@ -7,6 +7,7 @@ import FormBuscarHistoriaClinica from './components/Formulario/Form_Buscar_Histo
 import FormularioAltaHistoriaClinica from './components/Formulario/Form_Alta_Historia_Clinica.jsx';
 import FormAltaPersona from './components/Formulario/Form_Alta_Persona.jsx';
 import FormInformePaciente from './components/Formulario/Form_Informe_Paciente.jsx';
+import Pantalla1AltaHistoriaClinica from './components/Formulario/Pantalla1AltaHistoriaClinica.jsx';
 function App() {
   return (
     <Router>
@@ -17,7 +18,7 @@ function App() {
           <Route path="/paciente/alta_persona" element={<FormAltaPersona />} />
           <Route path="/paciente/buscar_persona" element={<FormBuscarIdPersona />} />
           <Route path="/paciente/informe_paciente" element={<FormInformePaciente />} />                        
-          <Route path="/historia-clinica/alta_historia_clinica" element={<FormularioAltaHistoriaClinica />} />
+          <Route path="/historia-clinica/alta_historia_clinica" element={<Pantalla1AltaHistoriaClinica />} />
           <Route path="/historia-clinica/buscar_historia_clinica" element={<FormBuscarHistoriaClinica />} />
         </Routes>
         <Footer />

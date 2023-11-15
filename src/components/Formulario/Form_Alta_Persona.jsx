@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState} from 'react';
 import { useForm } from 'react-hook-form';
 
-const FormAltaPersona = () => {
+const FormAltaPersona = ({onSuccess, onError}) => {
     const { register, formState: { errors }, handleSubmit } = useForm();
     const [responseData, setResponseData] = useState(null);
     const onSubmit = async (data) => {
@@ -13,15 +13,17 @@ const FormAltaPersona = () => {
                 },
                 body: JSON.stringify(data) // asegúrate de que los datos estén en el formato adecuado
             });
+            const idPersona = await response.json();
             if (!response.ok) {
-                throw new Error('Hubo un problema al procesar la solicitud');
+                throw new Error(idPersona.message);
             }
-            const idPersona = await response.json(); // o response.text() si la respuesta no es JSON
             setResponseData(idPersona)
+            onSuccess(idPersona.id)
             console.log(idPersona)
         } catch (error) {
             // Aquí puedes manejar errores de la solicitud
             console.error('Error:', error);
+            onError(error.message)
             setResponseData('Error')
         }
     }

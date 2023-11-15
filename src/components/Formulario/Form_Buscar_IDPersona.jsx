@@ -17,8 +17,6 @@ const FormBuscarIdPersona = ({ onSuccess, onError }) => {
             });
             const idPersona = await response.json();
             if (!response.ok) {
-                console.log('la respuesta es:')
-                console.log(JSON.stringify(idPersona))
                 throw new Error(idPersona.message);
             }
 
