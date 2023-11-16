@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
+import {Link} from 'react-router-dom';
+import { useForm } from 'react-hook-form';
 import FormBuscarIdPersona from './Form_Buscar_IDPersona';
-import Pantalla2AltaHistoriaClinica from './Pantalla2AltaHistoriaClinica';
-import Pantalla4AltaHistoriaClinica from './Pantalla4AltaHistoriaClinica';
+import Pantalla2InformePaciente from './Pantalla2InformePaciente';
 import Error_General from './Error_General';
 //pantalla de inicio de transaccion de alta historia clinica
-const Pantalla1AltaHistoriaClinica = () => {
+const Pantalla1InformePaciente = () => {
 
+    const { handleSubmit } = useForm();
     const [idPersona, setIdPersona] = useState(null);
     const [error, setError] = useState(null);
     const [errorsTransaction, setErrors] = useState([]);//para el mensaje de error
@@ -26,19 +28,25 @@ const Pantalla1AltaHistoriaClinica = () => {
     }
 
     return (
-        <div className='m-3'>
-            <h1>Alta Historia Clínica</h1>
-            {!idPersona && !error ? (
+        <div className="m-3">
+            <h1>Informe Paciente</h1>
+            { (!idPersona && !error) ? (
                 <FormBuscarIdPersona onSuccess={handleSuccess} onError={handleError} />
             ) : (
                 error ? (
                     <div>
                         <Error_General errors={errorsTransaction} />
-                        <Pantalla2AltaHistoriaClinica resetError={resetError}/>
+                        <form onSubmit={handleSubmit(resetError)}>
+                            <div className="d-flex flex-column align-items-center">
+                                <Link to="/">
+                                    <button className='btn btn-primary' type="button submit">Ir a la página principal</button>
+                                </Link>
+                            </div>
+                        </form>
                     </div>
                 ) : (
                     <div>
-                        <Pantalla4AltaHistoriaClinica id={idPersona} />
+                        <Pantalla2InformePaciente id={idPersona} />
                     </div>
                 )
             )}
@@ -47,4 +55,4 @@ const Pantalla1AltaHistoriaClinica = () => {
 
 }
 
-export default Pantalla1AltaHistoriaClinica;
+export default Pantalla1InformePaciente;

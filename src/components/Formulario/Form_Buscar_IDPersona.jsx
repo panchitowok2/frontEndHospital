@@ -91,7 +91,7 @@ const FormBuscarIdPersona = ({ onSuccess, onError }) => {
             ) : (
                 <div>
                 <Error_General errors={errorsTransaction}/>
-                <form onSubmit={handleSubmit(onSubmit)} className="p-5 bg-light rounded">
+                <form onSubmit={handleSubmit(onSubmit)} className="p-5 bg-light border rounded">
                     <div className="mb-3">
                         <label className="form-label">Apellido</label>
                         <input type="text" {...register("apellido", { required: true, maxLength: 15 })} className="form-control" />

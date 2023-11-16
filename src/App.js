@@ -4,10 +4,9 @@ import Content from './components/Content/Content.jsx'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import FormBuscarIdPersona from './components/Formulario/Form_Buscar_IDPersona.jsx';
 import FormBuscarHistoriaClinica from './components/Formulario/Form_Buscar_Historia_Clinica.jsx';
-import FormularioAltaHistoriaClinica from './components/Formulario/Form_Alta_Historia_Clinica.jsx';
 import FormAltaPersona from './components/Formulario/Form_Alta_Persona.jsx';
-import FormInformePaciente from './components/Formulario/Form_Informe_Paciente.jsx';
 import Pantalla1AltaHistoriaClinica from './components/Formulario/Pantalla1AltaHistoriaClinica.jsx';
+import Pantalla1InformePaciente from './components/Formulario/Pantalla1InformePaciente.jsx';
 function App() {
   return (
     <Router>
@@ -17,7 +16,7 @@ function App() {
         <Route path="/" element={<Content />} />
           <Route path="/paciente/alta_persona" element={<FormAltaPersona />} />
           <Route path="/paciente/buscar_persona" element={<FormBuscarIdPersona />} />
-          <Route path="/paciente/informe_paciente" element={<FormInformePaciente />} />                        
+          <Route path="/paciente/informe_paciente" element={<Pantalla1InformePaciente />} />                        
           <Route path="/historia-clinica/alta_historia_clinica" element={<Pantalla1AltaHistoriaClinica />} />
           <Route path="/historia-clinica/buscar_historia_clinica" element={<FormBuscarHistoriaClinica />} />
         </Routes>

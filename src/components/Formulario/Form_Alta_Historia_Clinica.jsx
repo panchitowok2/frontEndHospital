@@ -47,7 +47,7 @@ const FormularioAltaHistoriaClinica = ({ onSuccess, onError, id }) => {
                     {errors.nombre?.type === 'required' && <p>Campo Grupo Sanguineo Requerido</p>}
                 </div>
 
-                <div className="d-flex justify-content-end">
+                <div className="p-3 d-flex justify-content-end">
                     <button className="btn btn-primary" type="button submit">
                         Enviar
                     </button>
