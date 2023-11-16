@@ -1,3 +1,4 @@
+//polo
 const obtener_enfermedades = async () => {
   try {
     const response = await fetch('http://localhost:4000/api/obtener_enfermedades');
@@ -12,7 +13,7 @@ const obtener_enfermedades = async () => {
     console.error('Error al obtener las enfermedades:', error.message);
     throw error;
   }
-};
+};//polo
 
 const obtenerEnfermedad = async (id) => {
   try {

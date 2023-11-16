@@ -1,4 +1,6 @@
+//polo
 const obtener_consultas_por_enfermedad=async(enfermedad, fechaInicio,fechaFin)=>{
+
 try {
   const url= "http://localhost:4000/api/obtener_diagnosticos_por_enfermedad"
   const params={
@@ -24,7 +26,7 @@ try {
   console.error('Error al obtener los diagnosticos:', error.message);
   throw error;
 }
-}
+}//polo
 
 const obtenerConsulta = async (id) => {
   try {
