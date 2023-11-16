@@ -67,9 +67,9 @@ const Formulario_Consulta_Medicamentos_Mas_Recetados = () => {
     <div>
       <Error_General errors={errors} />
       
-      <h2 class="mb-3"> <i class="bi bi-capsule-pill"></i> Consultar medicamentos más recetados</h2>
+      <h2 class="mt-3"> <i class="bi bi-capsule-pill"></i> Consultar medicamentos más recetados</h2>
 
-      <div className="row">
+      <div className="row mt-3">
         <div className="col-md-9">
           <p> 
             Descubrí qué medicamentos fueron más recetados en una fecha específica por especialistas.
@@ -81,12 +81,10 @@ const Formulario_Consulta_Medicamentos_Mas_Recetados = () => {
             Nuestra base de datos te proporcionará información con una lista detallada y un grafico circular. 
           </p>
 
-          <div> <strong> ¡Tu salud, tu elección! </strong>  </div>
         </div>
       </div>
 
-      <form class="mt-3" onSubmit={handleSubmit}>
-
+      <form onSubmit={handleSubmit}>
         <div className="row">
           <div className="col-md-6">
             <div class="form-floating">
@@ -102,38 +100,36 @@ const Formulario_Consulta_Medicamentos_Mas_Recetados = () => {
           </div>
         </div>
         
-
-        <div className="row mt-3">
+        <div className="row">
           <div className="col">
-            <div class="form-floating mb-3">
+            <div class="form-floating mt-3">
               <input type="date" class="form-control" id="fechaInicio" value={fechaInicio} onChange={(e) => setFechaInicio(e.target.value)} required/>
               <label for="fechaInicio">Fecha de inicio</label>
             </div>
           </div>
 
           <div className="col">
-            <div class="form-floating mb-3">
+            <div class="form-floating mt-3">
               <input type="date" class="form-control" id="fechaFin" value={fechaFin} onChange={(e) => setFechaFin(e.target.value)} required/>
               <label for="fechaFin">Fecha de fin</label>
             </div>
           </div>
         </div>
 
-        <input type="submit" class="btn btn-primary mb-3" value="Consultar lista de medicamentos" />
+        <input type="submit" class="btn btn-primary mt-4" value="Consultar lista de medicamentos" />
       </form>
 
       {medicamentosMasRecetados.length > 0 && 
       <div class="row">
-        <div class="col-md-8">
+        <div class="col-md-8 mt-4">
           <TablaMedicamentosMasRecetados medicamentosMasRecetados={medicamentosMasRecetados} />
         </div>
 
-        <div class="col-md-4 justify-content-center">
+        <div class="col-md-4 justify-content-center mt-4">
           <GraficoMedicamentosMasRecetados medicamentosMasRecetados={medicamentosMasRecetados} />
         </div>
       </div>
       }
-      
     </div>
   )
 }
