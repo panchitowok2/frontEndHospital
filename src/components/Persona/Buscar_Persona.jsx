@@ -106,10 +106,17 @@ const Buscar_Persona = ({ state }) => {
               Masculino
             </label>
           </div>
+
+          <div className="form-check form-check-inline">
+            <input className="form-check-input" type="radio" name="sexo" id="sexoNoBinario" value="X" onChange={(e) => setSexo(e.target.value)} required />
+            <label className="form-check-label" htmlFor="sexoNoBinario">
+              No binario
+            </label>
+          </div>
         </div>
 
         <div class="col-md mt-3 text-md-end text-center">
-          <button type="submit" className="btn btn-primary"> Buscar persona </button>
+          <button type="submit" className="btn btn-primary"> Buscar </button>
         </div>
 
       </div>
