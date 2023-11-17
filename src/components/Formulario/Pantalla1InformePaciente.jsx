@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import FormBuscarIdPersona from './Form_Buscar_IDPersona';
 import Pantalla2InformePaciente from './Pantalla2InformePaciente';
-import Error_General from './Error_General';
+import ErrorGeneral from './Error_General';
 //pantalla de inicio de transaccion de alta historia clinica
 const Pantalla1InformePaciente = () => {
 
@@ -28,14 +28,18 @@ const Pantalla1InformePaciente = () => {
     }
 
     return (
-        <div className="m-3">
+        <div className="m-3 w-100 align-items-center">
             <h1>Informe Paciente</h1>
             { (!idPersona && !error) ? (
+                <div className='d-flex w-100 justify-content-center'>
                 <FormBuscarIdPersona onSuccess={handleSuccess} onError={handleError} />
+                </div>
             ) : (
                 error ? (
                     <div>
-                        <Error_General errors={errorsTransaction} />
+                        <div className='d-flex w-100 justify-content-center'>
+                        <ErrorGeneral errors={errorsTransaction} />
+                        </div>
                         <form onSubmit={handleSubmit(resetError)}>
                             <div className="d-flex flex-column align-items-center">
                                 <Link to="/">

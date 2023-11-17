@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import FormBuscarIdPersona from './Form_Buscar_IDPersona';
 import Pantalla2AltaHistoriaClinica from './Pantalla2AltaHistoriaClinica';
 import Pantalla4AltaHistoriaClinica from './Pantalla4AltaHistoriaClinica';
-import Error_General from './Error_General';
+import ErrorGeneral from './Error_General';
 //pantalla de inicio de transaccion de alta historia clinica
 const Pantalla1AltaHistoriaClinica = () => {
 
@@ -26,14 +26,18 @@ const Pantalla1AltaHistoriaClinica = () => {
     }
 
     return (
-        <div className='m-3'>
+        <div className='m-3 w-100 align-items-center'>
             <h1>Alta Historia Clínica</h1>
             {!idPersona && !error ? (
+                <div className='d-flex w-100 justify-content-center'>
                 <FormBuscarIdPersona onSuccess={handleSuccess} onError={handleError} />
+                </div>
             ) : (
                 error ? (
                     <div>
-                        <Error_General errors={errorsTransaction} />
+                        <div className='d-flex w-100 justify-content-center'>
+                        <ErrorGeneral errors={errorsTransaction} />
+                        </div>
                         <Pantalla2AltaHistoriaClinica resetError={resetError}/>
                     </div>
                 ) : (

@@ -39,3 +39,9 @@ html {
 .footerSiempreAbajo {
   padding-bottom: 100px;
 }
+
+.nav-pills .nav-link.active {
+  background-color: #007bff;
+  color: white;
+}
+

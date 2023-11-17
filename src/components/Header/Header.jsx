@@ -16,7 +16,7 @@ function Header() {
     <nav className="navbar navbar-expand-md bg-primary shadow">
       <div className="container-fluid">
         <Link to="/" className="navbar-brand text-white">
-          <img src={logoHospital} width="100" className="d-inline-block" />
+          <img src={logoHospital} alt="Logo" width="100" className="d-inline-block" />
           Hospital C. Villalba
         </Link>
 
@@ -34,8 +34,6 @@ function Header() {
                     Paciente
                   </a>
                   <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <li><Link to="/paciente/alta_persona" className='dropdown-item'>Alta Persona</Link></li>
-                    <li><Link to="/paciente/buscar_persona" className='dropdown-item'>Buscar Persona</Link></li>
                     <li><Link to="/paciente/informe_paciente" className='dropdown-item'>Informe de paciente</Link></li>
                   </ul>
                 </li>
@@ -45,7 +43,6 @@ function Header() {
                   </a>
                   <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
                     <li><Link to="/historia-clinica/alta_historia_clinica" className='dropdown-item'>Alta Historia Clinica</Link></li>
-                    <li><Link to="/historia-clinica/buscar_historia_clinica" className='dropdown-item'>Buscar Historia Clinica</Link></li>
                   </ul>
                 </li>
               </React.Fragment>

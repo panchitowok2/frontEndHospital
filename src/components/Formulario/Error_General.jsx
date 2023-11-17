@@ -2,19 +2,16 @@ import React from 'react';
 
 const Error_General = ({ errors }) => {
 
-  return(
-    errors.length > 0 && 
-      <div className="alert alert-danger mt-3">
-        <p> <strong> Error al procesar la transacción </strong> </p>
-
-        <ul>
-          {errors.map((error) => (
-            <ul>
-              <li> {error} </li>
-            </ul>
-          ))}
-        </ul>
-      </div>
+  return (
+    errors.length > 0 &&
+    <div className="alert alert-danger mt-3 w-50">
+      <p> <strong> Error al procesar la transacción </strong> </p>
+      <ul>
+        {errors.map((error, index) => (
+          <li key={index}> {error} </li>
+        ))}
+      </ul>
+    </div>
   )
 }
 

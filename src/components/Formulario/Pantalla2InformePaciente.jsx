@@ -27,9 +27,9 @@ const Pantalla2InformePaciente = ({ id }) => {
     }
 
     return (
-        <div>
+        <div className='w-100'>
             {(!idHistoriaClinica && !error) ? (
-                <div>
+                <div className='d-flex w-100 justify-content-center'>
                     <FormBuscarHistoriaClinica onSuccess={handleSuccess} onError={handleError} id={id} />
                 </div>
             ) : (

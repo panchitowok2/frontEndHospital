@@ -1,4 +1,3 @@
-import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 
 const FormularioAltaHistoriaClinica = ({ onSuccess, onError, id }) => {
@@ -15,13 +14,11 @@ const FormularioAltaHistoriaClinica = ({ onSuccess, onError, id }) => {
             });
             const historia_clinica = await response.json();
             if (!response.ok) {
-                throw new Error(historia_clinica);
+                throw new Error(historia_clinica.message);
             }
             onSuccess(historia_clinica.hist_clinica._id)
         } catch (error) {
-            // Aquí puedes manejar errores de la solicitud
-            console.error('Error:', error);
-            onError(error.message)
+            onError(error)
         }
     }
     return (
