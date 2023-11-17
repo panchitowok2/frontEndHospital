@@ -5,8 +5,9 @@ import TablaMedicamentosMasRecetados from './TablaMedicamentosMasRecetados'
 import GraficoMedicamentosMasRecetados from './GraficoMedicamentosMasRecetados'
 import Error_General from '../Errores/Error_General';
 
-import obtenerEspecialidades from '../../funcionesJS/funciones_especialidades.js';
+import obtenerEspecialidades, { obtenerTratamientosFarmacologicosConEspecialidad } from '../../funcionesJS/funciones_especialidades.js';
 import obtenerMedicamentosMasRecetados from '../../funcionesJS/funciones_medicamentos.js';
+import { buscarTratamientosFarmacologicosEnLaFecha } from '../../funcionesJS/funciones_tratamientos_farmacologicos.js';
 
 const Formulario_Consulta_Medicamentos_Mas_Recetados = () => {
   const [errors, setErrors] = useState([]);
@@ -19,6 +20,11 @@ const Formulario_Consulta_Medicamentos_Mas_Recetados = () => {
 
   // para guardar la consulta
   const [medicamentosMasRecetados, setMedicamentosMasRecetados] = useState([]);
+
+  // manejar errores dinamicos
+  const [errorEspecialidad, setErrorEspecialidad] = useState("");
+  const [errorFechas, setErrorFechas] = useState("");
+  
 
   const {
     isAuthenticated
@@ -56,8 +62,55 @@ const Formulario_Consulta_Medicamentos_Mas_Recetados = () => {
 
   useEffect(() => {
     setErrors([]);
+    setErrorEspecialidad('')
+
+    const fetchObtenerTratamientosFarmacologicosConEspecialidad = async () => {
+      if (! especialidad) return;
+ 
+      try {
+        await obtenerTratamientosFarmacologicosConEspecialidad(especialidad);
+        
+      } catch (err) {
+        // Manejar errores
+        setErrorEspecialidad('No existen tratamientos farmacologicos con dicha especialidad médica')
+      }
+    };
+
+    fetchObtenerTratamientosFarmacologicosConEspecialidad();
 
   }, [especialidad]);
+
+  useEffect(() => {
+    setErrors([]);
+    setErrorFechas('')
+    
+    const fetchBuscarTratamientosFarmacologicosEnLaFecha = async () => {
+      try {
+        const regexFecha = /^(?!0{1,3}\d)(?:[1-9]\d{3})-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/;
+
+        if (!regexFecha.test(fechaInicio) || !regexFecha.test(fechaFin)) {
+          return; // Si las fechas no están en el formato YYYY-MM-DD
+        }
+
+        const inicio = new Date(fechaInicio);
+        const fin = new Date(fechaFin);
+
+        if (fin < inicio) {
+          setErrorFechas(['La fecha de fin debe ser mayor o igual que la fecha de inicio'])
+          return;
+        }
+      
+        await buscarTratamientosFarmacologicosEnLaFecha(fechaInicio, fechaFin);
+
+      } catch (err) {
+        // Manejar errores
+        setErrorFechas('No se encontraron tratamientos en el rango de fechas seleccionado')
+      }
+    };
+
+    fetchBuscarTratamientosFarmacologicosEnLaFecha();
+
+  }, [fechaInicio, fechaFin]);
 
   if (! isAuthenticated) {
     return (<h1> No estas logeado </h1>)
@@ -97,6 +150,8 @@ const Formulario_Consulta_Medicamentos_Mas_Recetados = () => {
 
               <label for="especialidad">Especialidad</label>
             </div>
+
+            {errorEspecialidad && <div className="text-danger"> {errorEspecialidad}</div>}
           </div>
         </div>
         
@@ -114,9 +169,11 @@ const Formulario_Consulta_Medicamentos_Mas_Recetados = () => {
               <label for="fechaFin">Fecha de fin</label>
             </div>
           </div>
+
+          {errorFechas && <div className="text-danger"> {errorFechas}</div>}
         </div>
 
-        <input type="submit" class="btn btn-primary mt-4" value="Consultar lista de medicamentos" />
+        <input type="submit" className={`btn btn-primary mt-4 ${errorFechas || errorEspecialidad ? 'disabled' : ''}`} value="Consultar lista de medicamentos" />
       </form>
 
       {medicamentosMasRecetados.length > 0 && 
