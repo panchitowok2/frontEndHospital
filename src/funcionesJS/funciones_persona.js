@@ -70,5 +70,4 @@ const calcularEdad = (birthdate) => {
   return age;
 }
 
-
-export { calcularEdad, buscarDatosPersona,buscarIdPersona }
+export { calcularEdad,  buscarIdPersona, buscarDatosPersona }

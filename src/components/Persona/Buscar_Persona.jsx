@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import {buscarIdPersona,  buscarDatosPersona } from '../../funcionesJS/funciones_persona.js';
+import buscarPersona, { buscarDatosPersona } from '../../funcionesJS/funciones_persona.js';
 import { buscarDatosHistoriaClinica } from '../../funcionesJS/funciones_historia_clinica.js';
 
 const Buscar_Persona = ({ state }) => {
@@ -30,7 +30,7 @@ const Buscar_Persona = ({ state }) => {
 
       setBuscandoPersona(true);
       
-      const idPersona = await buscarIdPersona(tipoDocumento, documento, apellido, sexo);
+      const idPersona = await buscarPersona(tipoDocumento, documento, apellido, sexo);
       const personaEncontrada = await buscarDatosPersona(idPersona);
       setPersona(personaEncontrada)
       
@@ -106,10 +106,17 @@ const Buscar_Persona = ({ state }) => {
               Masculino
             </label>
           </div>
+
+          <div className="form-check form-check-inline">
+            <input className="form-check-input" type="radio" name="sexo" id="sexoNoBinario" value="X" onChange={(e) => setSexo(e.target.value)} required />
+            <label className="form-check-label" htmlFor="sexoNoBinario">
+              No binario
+            </label>
+          </div>
         </div>
 
-        <div class="col-md mt-3">
-          <button type="submit" class="btn btn-primary float-end"> Buscar persona </button>
+        <div class="col-md mt-3 text-md-end text-center">
+          <button type="submit" className="btn btn-primary"> Buscar </button>
         </div>
 
       </div>

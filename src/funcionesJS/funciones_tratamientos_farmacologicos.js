@@ -1,7 +1,7 @@
 const altaTratamientoFarmacologico = async (tipo, descripcion, fecha_inicio, duracion, historia_clinica_id, diagnostico_id, medico_id, dosificaciones) => {
   try {
-    const url = 'http://localhost:4000/api/altaTratamientoFarmacologico';
-    const params = {
+    const url = 'http://localhost:4000/api/tratamientos_farmacologicos';
+    const params = { 
       "tipo": tipo,
       "descripcion": descripcion,
       "fecha_inicio": fecha_inicio,
@@ -60,5 +60,4 @@ const buscarTratamientosFarmacologicosEnLaFecha = async (fechaInicio, fechaFin) 
   }
 };
 
-export { altaTratamientoFarmacologico }
-export { buscarTratamientosFarmacologicosEnLaFecha }
+export { altaTratamientoFarmacologico, buscarTratamientosFarmacologicosEnLaFecha }

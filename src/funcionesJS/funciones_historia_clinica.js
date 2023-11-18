@@ -26,4 +26,28 @@ const buscarDatosHistoriaClinica = async (id) => {
   }
 };
 
-export { buscarDatosHistoriaClinica }
+const buscarDiagnosticosHistoriaClinica = async (id) => {
+  try {
+    const url = `http://localhost:4000/api/historias_clinicas/${id}/diagnosticos`;
+
+    const response = await fetch(url, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.message || 'No se pudo obtener los diagnosticos en la historia clínica');
+    }
+    
+    return data;
+  } catch (error) {
+    console.error('Error al obtener los diagnosticos de la historia clínica:', error.message);
+    throw error;
+  }
+};
+
+export { buscarDatosHistoriaClinica,  buscarDiagnosticosHistoriaClinica}
