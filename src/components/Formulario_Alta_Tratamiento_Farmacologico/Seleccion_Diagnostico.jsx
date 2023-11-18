@@ -3,8 +3,8 @@ import React, { useEffect, useState } from 'react';
 import { obtenerDatosDiagnostico } from '../../funcionesJS/funciones_diagnosticos.js';
 import { obtenerConsulta } from '../../funcionesJS/funciones_consultas.js';
 import { obtenerEnfermedad } from '../../funcionesJS/funciones_enfermedades.js';
-import { obtenerMedico } from '../../funcionesJS/funciones_medicos.js';
-import { obtenerEspecialidad } from '../../funcionesJS/funciones_especialidades.js';
+import { obtenerMedico, obtenerEspecialidades } from '../../funcionesJS/funciones_medicos.js';
+import { buscarDiagnosticosHistoriaClinica } from '../../funcionesJS/funciones_historia_clinica.js';
 
 import moment from 'moment';
 
@@ -46,33 +46,24 @@ const Seleccion_Diagnostico = ({ state }) => {
     setDiagnostico("")
     setDiagnosticos([]);
     
-    const fetchData = async () => {
-      if (historiaClinica && historiaClinica.diagnosticos.length === 0) {
+    const fetchDiagnosticos = async () => {
+      if (! historiaClinica) return;
+
+      if (historiaClinica.diagnosticos.length === 0) {
         setErrors(['No hay diagnósticos cargados en la Historia Clínica del Paciente']);
         return;
       }
   
-      var listaDiagnosticos = [];
-  
       try {
-        if (historiaClinica) {
-          for (const diagnosticoHistoriaClinica of historiaClinica.diagnosticos) {
-            const diagnosticoBuscado = await obtenerDatosDiagnostico(diagnosticoHistoriaClinica);
-            listaDiagnosticos.push(diagnosticoBuscado);
-          }
-  
-          setDiagnosticos(listaDiagnosticos);
-        }
+        const listaDiagnosticos = await buscarDiagnosticosHistoriaClinica(historiaClinica._id)
+        setDiagnosticos(listaDiagnosticos);
+
       } catch (err) {
         setErrors([err.message])
-      } finally {
-        if (historiaClinica && listaDiagnosticos.length != historiaClinica.diagnosticos.length) {
-          setErrors(['Ocurrió un error al obtener los datos de los diagnósticos']);
-        }
       }
     };
   
-    fetchData();
+    fetchDiagnosticos();
   }, [historiaClinica]); 
 
   useEffect(() => {
@@ -130,13 +121,8 @@ const Seleccion_Diagnostico = ({ state }) => {
     const fetchEspecialidades = async () => {
       if (medico) {
         try {
-          var listaEspecialidades = [];
-
-          for (const especialidadMedica of medico.especialidades) {
-            const especialidadBuscada = await obtenerEspecialidad(especialidadMedica);
-            listaEspecialidades.push(especialidadBuscada);
-          }
-  
+          var listaEspecialidades = await obtenerEspecialidades(medico._id)
+          
           setEspecialidades(listaEspecialidades);
 
         } catch (err) {
@@ -155,13 +141,13 @@ const Seleccion_Diagnostico = ({ state }) => {
         <p> Por favor: seleccione el diagnostico por el cual va realizar el tratamiento:</p>
 
         <div className="row">
-          <div className="col-md-6">
+          <div className="col-md-9">
             <div className="form-floating">
               <select className="form-select" id="diagnostico" aria-label="Floating label select example" onChange={(e) => seleccionarDiagnostico(e.target.value)} required>
                 <option value=""> Seleccione una opción </option>
 
                 {diagnosticos.map((elemDiagnostico) => (
-                  <option key={elemDiagnostico._id} value={elemDiagnostico._id}> {elemDiagnostico.descripcion} </option>
+                  <option key={elemDiagnostico._id} value={elemDiagnostico._id}> {elemDiagnostico.descripcion} - Enfermedad: {elemDiagnostico.enfermedad.nombre} </option>
                 ))}
               </select>
               <label htmlFor="diagnostico">Diagnostico</label>
