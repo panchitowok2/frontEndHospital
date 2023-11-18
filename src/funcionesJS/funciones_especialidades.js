@@ -1,14 +1,12 @@
 const obtenerEspecialidades = async () => {
   try {
-    const url = 'http://localhost:4000/api/obtenerEspecialidades';
-    const params = { filter: "" };
+    const url = 'http://localhost:4000/api/especialidades';
 
     const response = await fetch(url, {
-      method: 'POST',
+      method: 'GET',
       headers: {
         'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(params)
+      }
     });
 
     const data = await response.json();
@@ -46,5 +44,30 @@ const obtenerEspecialidad = async (id) => {
     throw error;
   }
 };
-export {obtenerEspecialidades,obtenerEspecialidad};
 
+const obtenerTratamientosFarmacologicosConEspecialidad = async (id) => {
+  try {
+    const url = `http://localhost:4000/api/especialidades/${id}/tratamientos_farmacologicos`;
+
+    const response = await fetch(url, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.message || 'No se pudo obtener la lista de tratamientos farmacologicos');
+    }
+
+    return data;
+  } catch (error) {
+    console.error('Error al obtener la lista de tratamientos farmacologicos', error.message);
+    throw error;
+  }
+};
+
+export default obtenerEspecialidades;
+export { obtenerEspecialidad, obtenerTratamientosFarmacologicosConEspecialidad }

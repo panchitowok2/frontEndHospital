@@ -1,21 +1,19 @@
-import React from 'react';
+import Alert from 'react-bootstrap/Alert';
+import Button from 'react-bootstrap/Button';
 
 const Error_General = ({ errors }) => {
 
-  return(
-    errors.length > 0 && 
-      <div class="alert alert-danger mt-3">
-        <p> <strong> Error al procesar la transacción </strong> </p>
-
+  return (
+      errors.length > 0 && 
+      <Alert variant="danger" dismissible>
+        <Alert.Heading>Error al procesar la transaccion</Alert.Heading>
         <ul>
-          {errors.map((error, index) => (
-            
-              <li key={index}> {error} </li>
-            
+          {errors.map((error) => (
+            <li> {error} </li>
           ))}
         </ul>
-      </div>
-  )
+      </Alert>
+  );
 }
 
 export default Error_General;

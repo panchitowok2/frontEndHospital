@@ -40,5 +40,3 @@ const obtenerEnfermedad = async (id) => {
 };
 
 export { obtenerEnfermedad, obtener_enfermedades }
-
-

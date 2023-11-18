@@ -76,6 +76,5 @@ const obtenerMedicamento = async (id) => {
   }
 };
 
-
-export { obtenerMedicamentos, obtenerMedicamento , obtenerMedicamentosMasRecetados}
-
+export default obtenerMedicamentosMasRecetados;
+export { obtenerMedicamentos, obtenerMedicamento }
