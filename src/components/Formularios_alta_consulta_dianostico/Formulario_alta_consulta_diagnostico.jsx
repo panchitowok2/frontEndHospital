@@ -108,13 +108,13 @@ const Formulario_alta_consulta_diagnostico = () => {
   
 
   return (
-    <div>
+    <div className="ms-5 me-5"> 
       <Error_General errors={errors} />
 
-      <h1 className="fs-2 mb-3"> Alta Consulta y diagnostico</h1>
+      <h1 className="fs-2 mb-3"> Registrar Consulta y Diagnostico</h1>
 
       <div className="row">
-        <div className="col-md">
+        <div className="col-md ">
           <div className="accordion" id="accordionExample">
             <div className="accordion-item">
               <h2 className="accordion-header" id="headingOne">
@@ -148,7 +148,7 @@ const Formulario_alta_consulta_diagnostico = () => {
                   type="button"
                   data-bs-toggle="collapse"
                   data-bs-target="#seleccionarMedicoFecha"
-                  aria-expanded="false"
+                  aria-expanded="true"
                   aria-controls="seleccionarMedicoFecha"
                 >
                   2. Seleccionar un medico y fecha
@@ -179,7 +179,7 @@ const Formulario_alta_consulta_diagnostico = () => {
                   type="button"
                   data-bs-toggle="collapse"
                   data-bs-target="#datosConsultaDiagnostico"
-                  aria-expanded="false"
+                  aria-expanded="true"
                   aria-controls="datosConsultaDiagnostico"
                 >
                   3. Datos del consulta y diagnostico

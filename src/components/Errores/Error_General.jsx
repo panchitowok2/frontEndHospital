@@ -8,10 +8,10 @@ const Error_General = ({ errors }) => {
         <p> <strong> Error al procesar la transacción </strong> </p>
 
         <ul>
-          {errors.map((error) => (
-            <ul>
-              <li> {error} </li>
-            </ul>
+          {errors.map((error, index) => (
+            
+              <li key={index}> {error} </li>
+            
           ))}
         </ul>
       </div>

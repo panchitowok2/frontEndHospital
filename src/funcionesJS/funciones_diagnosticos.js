@@ -50,7 +50,8 @@ const alta_consulta_y_diagnostico= async(sintomasConsulta,observacionConsulta,fe
       
       return data;
   } catch (error) {
-    console.log("error en la funcion alta consulta y diagnostico: " +error);
+    console.log("error en la funcion alta consulta y diagnostico: " +error.message);
+    throw error;
   }
 }
 //polo

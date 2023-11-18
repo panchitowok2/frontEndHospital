@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { useAuth0 } from "@auth0/auth0-react";
 import { obtener_enfermedades } from "../../funcionesJS/funciones_enfermedades.js";
 import { obtener_consultas_por_enfermedad } from "../../funcionesJS/funciones_consultas.js";
+import "./estilos.css";
 
 const Formulario_Consultas_ordenadas_por_enfermedad = () => {
   const [errors, setErrors] = useState([]);
@@ -45,7 +46,7 @@ const Formulario_Consultas_ordenadas_por_enfermedad = () => {
     return <h1>no estas logeado reeeee</h1>;
   }
   return (
-    <div>
+    <div className="ms-5 me-5 ">
       {errors.length > 0 && (
         <div class="alert alert-danger mt-3">
           <p>
@@ -64,7 +65,7 @@ const Formulario_Consultas_ordenadas_por_enfermedad = () => {
       )}
       <h2 class="mb-3">
         {" "}
-        Obtener consultas realizadas para un tipo de enfermedad
+        Buscar consultas por una enfermedad
       </h2>
       <form class="mb-3" onSubmit={handleSubmit}>
         <div class="form-floating mb-3 w-50">
@@ -120,92 +121,140 @@ const Formulario_Consultas_ordenadas_por_enfermedad = () => {
       {consultas.length > 0 && (
         <div class="row">
           <div className="accordion">
-            <h2> total de consultas encontradas={consultas.length}</h2>
+            <h2> Registros encontrados: {consultas.length}</h2>
             {consultas.map((consulta, index) => (
-              <div key={index}>
-                <div className="accordion-item">
+              <div key={index} className="">
+                <div className="accordion-item ">
                   <button
-                    className="accordion-button"
+                    className="accordion-button "
                     type="button"
                     data-bs-toggle="collapse"
                     data-bs-target={`#consulta${index}`}
-                    aria-expanded="true"
+                    aria-expanded="false"
                     aria-controls={`consulta${index}`}
                   >
                     Consulta {index + 1}
                   </button>
                   <div
                     id={`consulta${index}`}
-                    className="accordion-collapse collapse show"
+                    className="accordion-collapse collapse "
                     aria-labelledby="headingOne"
                   >
-                    <div className="accordion-body">
-                      <h3>DATOS CONSULTA</h3>
-                      <p>Fecha: {consulta.consulta.fecha_consulta}</p>
-                      <h4>Datos del paciente:</h4>
-                      <p>Nombre:{consulta.consulta.paciente_consulta.nombre} {consulta.consulta.paciente_consulta.apellido}</p>
-                      <p>Tipo documento:{consulta.consulta.paciente_consulta.tipo_documento} </p>
-                      <p>Numero:{consulta.consulta.paciente_consulta.documento}</p>
-                      <p>Sexo:{consulta.consulta.paciente_consulta.sexo}</p>
-                      <p>Direccion:{consulta.consulta.paciente_consulta.direccion}</p>
-                      <p>Telefono:{consulta.consulta.paciente_consulta.telefono}</p>
-                      <p>Sintomas: {consulta.consulta.sintomas}</p>
-                      <p>Observaciones: {consulta.consulta.observacion} </p>
-                      <h4>Medico: </h4>
-                      <p>
-                        nombre:{consulta.consulta.medico_consulta.nombre} {consulta.consulta.medico_consulta.apellido}
-                      </p>
-                      <p>legajo:{consulta.consulta.medico_consulta.legajo}</p>
-                      <h4>
-                        Diagnostico
-                      </h4>
-                      <p>Observaciones:{consulta.consulta.diagnostico.observaciones}</p>
-                      <p>Enfermedad:{consulta.consulta.diagnostico.enfermedad}</p>
-                      <h4>Tratamiento:</h4>
-                      {consulta.consulta.diagnostico.tratamiento_farmacologico != null ? (
-                      <>
-                      <p>Descripcion:{consulta.consulta.diagnostico.tratamiento_farmacologico.descripcion_tratamiento_farmacologico}</p>
-                      <p>Medicamento:{consulta.consulta.diagnostico.tratamiento_farmacologico.nombre_medicamento}</p>
-                      <p>Presentacion:{consulta.consulta.diagnostico.tratamiento_farmacologico.presentacion_medicamento}</p>
-                      <p>Dosis:{consulta.consulta.diagnostico.tratamiento_farmacologico.dosis}</p>
-                      <p>fecha de inicio del tratamiento:{consulta.consulta.diagnostico.tratamiento_farmacologico.fecha_inicio}</p>
-                     <p>duracion:{consulta.consulta.diagnostico.tratamiento_farmacologico.duracion}</p>
-                      </>
-  ) : (
-    // Renderizar otro contenido si el tratamiento es nulo
-    <p>No hay tratamiento registrado.</p>
-  )}
+                    <div
+                      className="accordion-body d-flex flex-column"
+                      aria-expanded="false"
+                    >
+                      <div className="">
+                      <p><b>Fecha:</b> {consulta.consulta.fecha_consulta}</p>
+                      </div>
+
+
+                      <div className="d-flex flex-wrap">
+                      <div className="col-md-2 me-5 mb-4" >
+                        <h4 >Datos del paciente:</h4>
+                        <p className="mb-2">
+                          <b>Nombre:</b> {consulta.consulta.paciente_consulta.nombre}{" "}
+                          {consulta.consulta.paciente_consulta.apellido}
+                        </p>
+                        <p className="mb-2">
+                          <b>Tipo de documento: </b>{consulta.consulta.paciente_consulta.tipo_documento}{" "}
+                        </p>
+                        <p className="mb-2">
+                        <b>Número:</b> {consulta.consulta.paciente_consulta.documento}
+                        </p>
+                        <p className="mb-2"><b>Sexo:</b> {consulta.consulta.paciente_consulta.sexo}</p>
+                        <p className="mb-2">
+                        <b>Dirección:</b> {consulta.consulta.paciente_consulta.direccion}
+                        </p>
+                        <p className="mb-2">
+                        <b>Teléfono:</b>
+                          {consulta.consulta.paciente_consulta.telefono}
+                        </p>
+                      </div>
+                      <div className="col-md-2 me-5 mb-4">
+                      <h4>Síntomas:</h4>
+                        <p className="mb-2"><b>Síntomas:</b> {consulta.consulta.sintomas}</p>
+                        <p className="mb-2"><b>Observaciones:</b> {consulta.consulta.observacion} </p>
+                      </div>
+                      <div className="col-md-2 me-5 mb-4">
+                        <h4>Médico: </h4>
+                        <p className="mb-2">
+                          <b>Nombre:</b> {consulta.consulta.medico_consulta.nombre}{" "}
+                          {consulta.consulta.medico_consulta.apellido}
+                        </p>
+                        <p className="mb-2"><b>Legajo:</b> {consulta.consulta.medico_consulta.legajo}</p>
+                      </div>
+                      <div className="col-md-2 me-5 mb-4">
+                        <h4>Diagnóstico</h4>
+                        <p className="mb-2"> 
+                          <b>Observaciones:</b> {consulta.consulta.diagnostico.observaciones}
+                        </p>
+                        <p className="mb-2 ">
+                          <b>Enfermedad:</b> {consulta.consulta.diagnostico.enfermedad}
+                        </p>
+                      </div>
+
+                      <div className="col-md-2 me-5 mb-4">
+                        <h4>Tratamiento:</h4>
+                        {consulta.consulta.diagnostico
+                          .tratamiento_farmacologico != null ? (
+                          <>
+                            <p className="mb-2">
+                            <b>Descripción:</b> {
+                                consulta.consulta.diagnostico
+                                  .tratamiento_farmacologico
+                                  .descripcion_tratamiento_farmacologico
+                              }
+                            </p>
+                            <p className="mb-2">
+                              <b>Medicamento:</b> {
+                                consulta.consulta.diagnostico
+                                  .tratamiento_farmacologico.nombre_medicamento
+                              }
+                            </p>
+                            <p className="mb-2">
+                            <b>Presentación:</b> {
+                                consulta.consulta.diagnostico
+                                  .tratamiento_farmacologico
+                                  .presentacion_medicamento
+                              }
+                            </p>
+                            <p className="mb-2">
+                              <b>Dosis:</b> {
+                                consulta.consulta.diagnostico
+                                  .tratamiento_farmacologico.dosis
+                              }
+                            </p>
+                            <p className="mb-2">
+                              <b>Fecha de inicio del tratamiento:</b> {
+                                consulta.consulta.diagnostico
+                                  .tratamiento_farmacologico.fecha_inicio
+                              }
+                            </p>
+                            <p className="mb-2">
+                            <b>Duración:</b> {
+                                consulta.consulta.diagnostico
+                                  .tratamiento_farmacologico.duracion
+                              }
+                            </p>
+                          </>
+                        ) : (
+                          // Renderizar otro contenido si el tratamiento es nulo
+                          <p className="mb-2">No hay tratamiento registrado.</p>
+                        )}</div>
+                     
+
+                     </div>
+
+
                     </div>
                   </div>
                 </div>
               </div>
             ))}
-
-            <div className="accordion-item">
-              <button
-                className="accordion-button"
-                type="button"
-                data-bs-toggle="collapse"
-                data-bs-target="#collapseOne2"
-                aria-expanded="true"
-                aria-controls="collapseOne"
-              >
-                1. Datos del Paciente
-              </button>
-
-              <div
-                id="collapseOne2"
-                className="accordion-collapse collapse show"
-                aria-labelledby="headingOne"
-              >
-                <div className="accordion-body">
-                  <h2>hola mundo</h2>
-                </div>
-              </div>
-            </div>
           </div>
 
-          <div class="col-md-4 justify-content-center"></div>
+         
         </div>
       )}
     </div>

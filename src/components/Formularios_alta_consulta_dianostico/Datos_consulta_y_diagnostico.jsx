@@ -31,10 +31,15 @@ const Datos_consulta_y_diagnostico = ({ state }) => {
       try {
         const data = await obtener_enfermedades();
         set_enfermedades(data);
-      } catch (error) {}
+      } catch (error) {
+        setErrors([error.message])
+      }
     };
     fetchData();
   }, []);
+
+
+  
   let alta_consulta_completa = async(e) => {
     e.preventDefault();
     try {
