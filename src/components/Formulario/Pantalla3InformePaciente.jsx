@@ -56,7 +56,7 @@ const Pantalla3InformePaciente = ({ id }) => {
                             <div className="row">
                                 <div className="col-4">
                                     <nav id="indice" className="h-100 flex-column align-items-stretch pe-4 border-end">
-                                        <nav className="nav nav-pills flex-column">
+                                        <nav id='indice' className="nav nav-pills flex-column">
                                             <a className="nav-link text-dark" href="#item-1">Datos del paciente</a>
                                             <a className="nav-link text-dark" href="#item-2">Historia clínica</a>
                                             <a className="nav-link text-dark" href="#item-3">Consultas</a>
@@ -70,8 +70,8 @@ const Pantalla3InformePaciente = ({ id }) => {
                                     </nav>
                                 </div>
 
-                                <div className="col-8" style={{ height: '500px', overflowY: 'scroll' }} data-bs-spy="scroll">
-                                    <div data-bs-target="#indice" data-bs-smooth-scroll="true" className="scrollspy-example-2 p-2" tabIndex="0">
+                                <div className="col-8">
+                                    <div className="scrollspy-example-2 p-2" style={{ height: '500px', overflowY: 'scroll' }} data-bs-spy="scroll" data-bs-target="#indice" data-bs-smooth-scroll="true" tabIndex="0">
                                         <div id="item-1">
                                             <div className="container border bg-light rounded">
                                                 <h4 className="text-dark">Datos del paciente:</h4>

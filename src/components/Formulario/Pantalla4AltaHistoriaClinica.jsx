@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import FormBuscarHistoriaClinica from './Form_Buscar_Historia_Clinica';
 import Pantalla3AltaHistoriaClinica from './Pantalla3AltaHistoriaClinica';
@@ -29,7 +29,7 @@ const Pantalla4AltaHistoriaClinica = ({ id }) => {
     return (
         <div>
             {(!idHistoriaClinica && !error) ? (
-                <div>
+                <div className='d-flex w-100 justify-content-center'>
                     <FormBuscarHistoriaClinica onSuccess={handleSuccess} onError={handleError} id={id} />
                 </div>
             ) : (
@@ -37,7 +37,9 @@ const Pantalla4AltaHistoriaClinica = ({ id }) => {
                     <Pantalla3AltaHistoriaClinica id={id} />
                 ) : (
                     <div>
-                        <Error_General errors={errorsTransaction} />
+                        <div className='d-flex w-100 justify-content-center'>
+                            <Error_General errors={errorsTransaction} />
+                        </div>
                         <form onSubmit={handleSubmit(resetError)}>
                             <div className="d-flex flex-column align-items-center">
                                 <Link to="/">

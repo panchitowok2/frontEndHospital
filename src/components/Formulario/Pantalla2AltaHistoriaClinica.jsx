@@ -46,7 +46,7 @@ const Pantalla2AltaHistoriaClinica = ({ resetError }) => {
                         </form>
                     </div>
                 ) : (
-                    <div>
+                    <div className='d-flex w-100 justify-content-center'>
                         <Pantalla3AltaHistoriaClinica id={idPersona} />
                     </div>
                 )
