@@ -86,11 +86,11 @@ const Formulario_Alta_Tratamiento_Farmacologico = () => {
   }
   
   return(
-    <div>
+    <div className='m-3 footerSiempreAbajo'>
       <Mensajes_Exito messages={messages} />
       <Error_General errors={errors} />
 
-      <h1 className="fs-2"> <i class="bi bi-heart-pulse"></i> Alta de Tratamiento Farmacológico</h1>
+      <h1 className="fs-2"> <i className="bi bi-heart-pulse"></i> Alta de Tratamiento Farmacológico</h1>
 
       <div className="row">
         <div className="col-md mt-3">

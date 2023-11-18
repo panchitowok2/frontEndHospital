@@ -108,7 +108,7 @@ const Formulario_alta_consulta_diagnostico = () => {
   
 
   return (
-    <div className="ms-5 me-5"> 
+    <div className="ms-5 me-5 footerSiempreAbajo"> 
       <Error_General errors={errors} />
 
       <h1 className="fs-2 mb-3"> Registrar Consulta y Diagnostico</h1>

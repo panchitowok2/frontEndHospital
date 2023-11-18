@@ -117,7 +117,7 @@ const Formulario_Consulta_Medicamentos_Mas_Recetados = () => {
   }
 
   return (
-    <div>
+    <div className='m-3 footerSiempreAbajo'>
       <Error_General errors={errors} />
       
       <h2 class="mt-3"> <i class="bi bi-capsule-pill"></i> Consultar medicamentos más recetados</h2>

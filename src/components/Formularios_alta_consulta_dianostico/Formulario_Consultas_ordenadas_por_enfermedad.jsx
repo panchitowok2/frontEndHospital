@@ -46,7 +46,7 @@ const Formulario_Consultas_ordenadas_por_enfermedad = () => {
     return <h1>no estas logeado reeeee</h1>;
   }
   return (
-    <div className="ms-5 me-5 ">
+    <div className="ms-5 me-5 footerSiempreAbajo">
       {errors.length > 0 && (
         <div class="alert alert-danger mt-3">
           <p>

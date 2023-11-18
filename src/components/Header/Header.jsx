@@ -31,6 +31,32 @@ function Header() {
               <React.Fragment>
                 <li className="nav-item dropdown">
                   <a className="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Tratamiento Farmacologico
+                  </a>
+                  <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <li><Link to="/tratamientoFarmacologico/alta_tratamiento" className='dropdown-item'>Alta Tratamiento Farmacológico</Link></li>
+                  </ul>
+                </li>
+                <li className="nav-item dropdown">
+                  <a className="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Consulta
+                  </a>
+                  <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <li><Link to="/consulta/alta_consulta" className='dropdown-item'>Alta Consulta</Link></li>
+                    <li><Link to="/consulta/consultas_por_enfermedad" className='dropdown-item'>Buscar consultas por enfermedad</Link></li>
+                  </ul>
+                </li>
+
+                <li className="nav-item dropdown">
+                  <a className="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Medicamento
+                  </a>
+                  <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <li><Link to="/medicamento/medicamentos_mas_recetados" className='dropdown-item'>Medicamentos más recetados</Link></li>
+                  </ul>
+                </li>
+                <li className="nav-item dropdown">
+                  <a className="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                     Paciente
                   </a>
                   <ul className="dropdown-menu" aria-labelledby="navbarDropdown">

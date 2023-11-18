@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import buscarPersona, { buscarDatosPersona } from '../../funcionesJS/funciones_persona.js';
+import {buscarIdPersona, buscarDatosPersona } from '../../funcionesJS/funciones_persona.js';
 import { buscarDatosHistoriaClinica } from '../../funcionesJS/funciones_historia_clinica.js';
 
 const Buscar_Persona = ({ state }) => {
@@ -30,7 +30,7 @@ const Buscar_Persona = ({ state }) => {
 
       setBuscandoPersona(true);
       
-      const idPersona = await buscarPersona(tipoDocumento, documento, apellido, sexo);
+      const idPersona = await buscarIdPersona(tipoDocumento, documento, apellido, sexo);
       const personaEncontrada = await buscarDatosPersona(idPersona);
       setPersona(personaEncontrada)
       
