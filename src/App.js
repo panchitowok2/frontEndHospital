@@ -11,7 +11,7 @@ import MedMasRecetados from './components/Formulario_Consulta_Medicamentos_Mas_R
 function App() {
   return (
     <Router>
-      <div className="container-fluid min-vh-100 m-0 p-0">
+      <div className="container-fluid min-vh-100 m-0 p-0 bg-light">
         <Header />
 
         <Routes>
