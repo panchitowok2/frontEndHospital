@@ -18,6 +18,9 @@ const Buscar_paciente = ({ state }) => {
     setPersona,
     setMedicos,
     setErrors,
+   setexpandir1,
+    setexpandir2,
+    setexpandir3
   } = state;
 
   let Buscar_Persona = async (e) => {
@@ -42,6 +45,11 @@ const Buscar_paciente = ({ state }) => {
       const resultado_medicos = await obtener_medicos();
       //console.log(resultado_medicos);
       setMedicos(resultado_medicos);
+      let turno=document.getElementById("fechaTurno");
+      setexpandir1(true)
+      setexpandir2(false)
+      setexpandir3(true)
+      turno.focus()
     } catch (err) {
       setErrors([err.message]);
       setPersona("");

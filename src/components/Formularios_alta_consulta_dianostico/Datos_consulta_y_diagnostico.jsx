@@ -71,7 +71,8 @@ const Datos_consulta_y_diagnostico = ({ state }) => {
               Seleccioná una opción
             </option>
             {turnos.map((turno) => (
-              <option key={turno._id} value={turno._id} data-fecha={turno.fecha}>{turno.fecha} {turno.hora}</option>
+              
+              <option key={turno._id} value={turno._id} data-fecha={turno.fecha}>{(new Date(turno.fecha)).toLocaleDateString()} {turno.hora}</option>
             ))}
           </select>
           <label for="turnoElegido">seleccionar turno</label>
@@ -122,7 +123,7 @@ const Datos_consulta_y_diagnostico = ({ state }) => {
               />
               <label htmlFor="descripcion_diagnostico">descripcion del diagnostico</label>
             </div>
-            <div class="form-floating mb-3 w-50">
+            <div class="form-floating mb-3 w-100">
           <select
             class="form-select"
             id="enfermedad"
@@ -143,7 +144,7 @@ const Datos_consulta_y_diagnostico = ({ state }) => {
           <input
     type="submit"
     class="btn btn-primary mb-3"
-    value="buscar turnos"
+    value="guardar consuta y diagnostico"
   />
         </div>
 
