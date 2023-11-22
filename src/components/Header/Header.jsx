@@ -13,68 +13,59 @@ function Header() {
   } = useAuth0();
 
   return (
-    <nav className="navbar navbar-expand-md bg-primary shadow">
+    <nav className="navbar navbar-expand-md bg-primary">
       <div className="container-fluid">
         <Link to="/" className="navbar-brand text-white">
-          <img src={logoHospital} alt="Logo" width="100" className="d-inline-block" />
-          Hospital C. Villalba
+          <img src={logoHospital} alt="Logo" title="Hospital Conrado Villalba" width="100" className="d-inline-block" />
         </Link>
 
-        {/*  boton hamburguesa */}
         <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon"></span>
         </button>
 
-        <div className="collapse navbar-collapse ms-5" id="navbarSupportedContent">
-          <ul className="navbar-nav">
+        <div className="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul className="navbar-nav me-auto mb-2 mb-md-0">
+
             {isAuthenticated ? (
               <React.Fragment>
                 <li className="nav-item dropdown">
                   <a className="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    Tratamiento Farmacologico
+                    Pacientes
                   </a>
                   <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <li><Link to="/tratamientoFarmacologico/alta_tratamiento" className='dropdown-item'>Alta Tratamiento Farmacológico</Link></li>
+                    <li><Link to="/paciente/informe_paciente" className='dropdown-item'>Generar informe de paciente</Link></li>
                   </ul>
                 </li>
 
                 <li className="nav-item dropdown">
                   <a className="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    Consulta
+                    Historias Clínicas
                   </a>
                   <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <li><Link to="/consulta/alta_consulta" className='dropdown-item'>Alta Consulta</Link></li>
+                    <li><Link to="/historia-clinica/alta_historia_clinica" className='dropdown-item'>Alta de historia clínica</Link></li>
+                  </ul>
+                </li>
+
+                <li className="nav-item dropdown">
+                  <a className="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Consultas
+                  </a>
+                  <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <li><Link to="/consulta/alta_consulta" className='dropdown-item'>Nueva consulta</Link></li>
                     <li><Link to="/consulta/consultas_por_enfermedad" className='dropdown-item'>Buscar consultas por enfermedad</Link></li>
                   </ul>
                 </li>
 
                 <li className="nav-item dropdown">
                   <a className="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    Medicamento
+                    Tratamientos Farmacológicos
                   </a>
                   <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <li><Link to="/medicamento/medicamentos_mas_recetados" className='dropdown-item'>Medicamentos más recetados</Link></li>
+                    <li><Link to="/tratamientoFarmacologico/alta_tratamiento" className='dropdown-item'>Nuevo tratamiento</Link></li>
+                    <li><Link to="/medicamento/medicamentos_mas_recetados" className='dropdown-item'>Buscar medicamentos más recetados</Link></li>
                   </ul>
                 </li>
 
-                <li className="nav-item dropdown">
-                  <a className="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    Paciente
-                  </a>
-                  <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <li><Link to="/paciente/informe_paciente" className='dropdown-item'>Informe de paciente</Link></li>
-                  </ul>
-                </li>
-
-                <li className="nav-item dropdown">
-                  <a className="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    Historia Clinica
-                  </a>
-                  <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <li><Link to="/historia-clinica/alta_historia_clinica" className='dropdown-item'>Alta Historia Clinica</Link></li>
-                  </ul>
-                </li>
-                
               </React.Fragment>
             ) : (
               <React.Fragment>
@@ -82,40 +73,26 @@ function Header() {
                   <Link to="/" className='nav-link text-white'>Inicio</Link>
                 </li>
                 <li className="nav-item">
-                  <Link to="/nosotros" className='nav-link text-white'>Sobre Nosotros</Link>
+                  <Link to="/nosotros" className='nav-link text-white'>Sobre nosotros</Link>
                 </li>
                 <li className="nav-item">
 
-                  <Link to="/contacto" className='nav-link text-white'>Contacto</Link>
+                  <Link to="/contacto" className='nav-link text-white'>Contactános</Link>
                 </li>
               </React.Fragment>
             )}
+
           </ul>
-
-          <div className="d-none d-md-block ms-auto">
-            {isAuthenticated ? (
-              <BotonLogOut />
-            ) : (
-              <BotonLogIn />
-            )}
-          </div>
-
-          {/* menu para pantallas chicas */}
-          <div className="d-md-none">
-            <ul className="navbar-nav">
-              {isAuthenticated ? (
-                <li className="nav-item">
-                  <a className="nav-link text-white" onClick={() => logout({ logoutParams: { returnTo: window.location.origin } })}> Cerrar sesión </a>
-                </li>
-              ) : (
-                <li className="nav-item">
-                  <a className="nav-link text-white" onClick={() => loginWithRedirect()}>Iniciar sesión</a>
-                </li>
-              )}
-
-            </ul>
-          </div>
         </div>
+
+        <div className="d-none d-md-block ms-auto">
+          {isAuthenticated ? (
+            <BotonLogOut />
+          ) : (
+            <BotonLogIn />
+          )}
+        </div>
+
       </div>
     </nav>
   );

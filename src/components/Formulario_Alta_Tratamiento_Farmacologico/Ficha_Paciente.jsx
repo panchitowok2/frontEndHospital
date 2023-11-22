@@ -14,7 +14,7 @@ const Ficha_Paciente = ({ state }) => {
       ! buscandoPersona ? (
         <div>
           <div className="card">
-            <div className="card-header">
+            <div className="card-header fw-bold">
               Ficha del paciente
             </div>
 
@@ -36,7 +36,7 @@ const Ficha_Paciente = ({ state }) => {
           </div>
 
           <div className="card mt-3">
-            <div className="card-header">
+            <div className="card-header fw-bold">
               Datos Historia Clínica
             </div>
 
