@@ -3,7 +3,8 @@ import {buscarIdPersona, buscarDatosPersona } from '../../funcionesJS/funciones_
 import { buscarDatosHistoriaClinica } from '../../funcionesJS/funciones_historia_clinica.js';
 
 const Buscar_Persona = ({ state }) => {
-  const { 
+  const {
+    setId,
     tipoDocumento, 
     setTipoDocumento, 
     documento, 
@@ -31,12 +32,13 @@ const Buscar_Persona = ({ state }) => {
       setBuscandoPersona(true);
       
       const idPersona = await buscarIdPersona(tipoDocumento, documento, apellido, sexo);
+      setId(idPersona);
       const personaEncontrada = await buscarDatosPersona(idPersona);
       setPersona(personaEncontrada)
-      
     } catch (err) {
       setErrors([err.message])
       setPersona("")
+      setId("")
     }
 
     setTimeout(() => {
@@ -45,7 +47,10 @@ const Buscar_Persona = ({ state }) => {
   }
 
   useEffect(() => {
-    if (!persona) return;
+    if (!persona){
+    setId("")
+      return;
+    }
     
     const fetchHistoriaClinica = async () => {
       try {
@@ -115,7 +120,7 @@ const Buscar_Persona = ({ state }) => {
           </div>
         </div>
 
-        <div class="col-md mt-3 text-md-end text-center">
+        <div className="col-md mt-3 text-md-end text-center">
           <button type="submit" className="btn btn-primary"> Buscar </button>
         </div>
 

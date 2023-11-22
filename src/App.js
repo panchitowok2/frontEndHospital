@@ -3,7 +3,7 @@ import Footer from './components/Footer/Footer.jsx';
 import Content from './components/Content/Content.jsx'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Pantalla1AltaHistoriaClinica from './components/Formulario/Pantalla1AltaHistoriaClinica.jsx';
-import Pantalla1InformePaciente from './components/Formulario/Pantalla1InformePaciente.jsx';
+import Pantalla1InformePaciente from './components/Formulario/Form_Informe_Paciente_Acordion.jsx';
 import Formulario_Alta_Tratamiento_Farmacologico from './components/Formulario_Alta_Tratamiento_Farmacologico/Formulario_Alta_Tratamiento_Farmacologico.jsx'
 import AltaConsulta from './components/Formularios_alta_consulta_dianostico/Formulario_alta_consulta_diagnostico.jsx'
 import ConsultasPorEnfermedad from './components/Formularios_alta_consulta_dianostico/Formulario_Consultas_ordenadas_por_enfermedad.jsx'
