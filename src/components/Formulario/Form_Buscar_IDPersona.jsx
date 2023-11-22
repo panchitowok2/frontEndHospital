@@ -22,42 +22,47 @@ const FormBuscarIdPersona = ({ onSuccess, onError }) => {
         }
     };
     return (
-        <div className='card w-50'>
-            <h2 className='card-header'>Buscar Persona</h2>
-                <div className='card-body'>
-                    <form onSubmit={handleSubmit(onSubmit)} className="p-5 bg-light border rounded">
-                        <div className="input-group mb-1 mt-0">
-                            <span className="input-group-text">Apellido</span>
-                            <input type="text" {...register("apellido", { required: true, maxLength: 15 })} className="form-control" />
-                        </div>
-                        <div className={`text-danger ${errors.apellido?.type === "required" ? "" : "invisible"}`}>El Apellido de requerido</div>
-                        <div className="mb-1 input-group">
-                            <span className='input-group-text'>Tipo Documento</span>
-                            <select className="form-select" {...register("tipo_documento")}>
-                                <option value='DNI'>DNI</option>
-                                <option value='LI'>LI</option>
-                                <option value='LE'>LE</option>
-                            </select>
-                        </div>
-                        <div className={`text-danger ${errors.tipo_documento?.type === "required" ? "" : "invisible"}`}>El tipo documento es requerido</div>                       
-                        <div className="mb-1 input-group mt-0">
-                            <span className='input-group-text'>Número Documento</span>
-                            <input type="number" {...register("documento", { required: true, maxLength: 9 })} className="form-control" />
-                        </div>
-                        <div className={`text-danger ${errors.documento?.type === "required" ? "" : "invisible"}`}>El número de documento requerido</div>
-                        <div className="mb-1 input-group">
-                            <span className='input-group-text'>Sexo</span>
-                            <select className="form-select" {...register("sexo")}>
-                                <option value='M'>M</option>
-                                <option value='F'>F</option>
-                            </select>
-                        </div>
-                        <div className="d-flex justify-content-end">
-                            <button className="btn btn-primary mt-3" type="submit">Enviar</button>
-                        </div>
-                    </form>
+        <div className='row'>
+            <div className='col-md'>
+                <div className='card'>
+                    <div className='card-header'>Buscar Persona</div>
+                    <div className='card-body'>
+                        <form onSubmit={handleSubmit(onSubmit)} className="">
+                            <div className="form-floating mb-1">
+                                <input type="text" id='apellido' {...register("apellido", { required: true, maxLength: 15 })} className="form-control" />
+                                <label htmlFor="apellido">Apellido</label>
+                            </div>
+                            <div className={`text-danger ${errors.apellido?.type === "required" ? "" : "invisible"}`}>El Apellido de requerido</div>
+                            <div className="form-floating mb-1">
+                                <select className="form-select" id='tipoDocumento' {...register("tipo_documento")}>
+                                    <option value='DNI'>DNI</option>
+                                    <option value='LI'>LI</option>
+                                    <option value='LE'>LE</option>
+                                </select>
+                                <label htmlFor="tipoDocumento">Tipo Documento</label>
+                            </div>
+                            <div className={`text-danger ${errors.tipo_documento?.type === "required" ? "" : "invisible"}`}>El tipo documento es requerido</div>
+                            <div className="mb-1 form-floating">
+                                <input type="number" id='documento' {...register("documento", { required: true, maxLength: 9 })} className="form-control" />
+                                <label htmlFor="documento">Número Documento</label>
+                            </div>
+                            <div className={`text-danger ${errors.documento?.type === "required" ? "" : "invisible"}`}>El número de documento requerido</div>
+                            <div className="mb-1 form-floating">
+                                <select className="form-select" id='sexo' {...register("sexo")}>
+                                    <option value='M'>Masculino</option>
+                                    <option value='F'>Femenino</option>
+                                    <option value='F'>No Binario</option>
+                                </select>
+                                <label htmlFor="sexo">Sexo</label>
+                            </div>
+                            <div className="d-flex justify-content-end">
+                                <button className="btn btn-primary mt-3" type="submit">Enviar</button>
+                            </div>
+                        </form>
 
+                    </div>
                 </div>
+            </div>
         </div>
     );
 

@@ -45,7 +45,7 @@ const Pantalla_Informe_Acordion = ({ id }) => {
     useEffect(() => {
         if (id != "") {
             buscarDatosPaciente(id)
-        }else{
+        } else {
             setDatosPaciente("")
         }
     }, [id]);
@@ -69,6 +69,7 @@ const Pantalla_Informe_Acordion = ({ id }) => {
                                     ))}
                                 </div>
                             </div>
+
                             <div className='row'>
                                 <div className="col-md">
                                     <div className="container border bg-light rounded">
@@ -84,93 +85,104 @@ const Pantalla_Informe_Acordion = ({ id }) => {
                                     ))}
                                 </div>
                             </div>
+
                             <div className='row'>
                                 <div className="col-md">
                                     <div className="container border bg-light rounded">
                                         <h4 className="bg-light text-dark">Medico que atendió consultas:</h4>
                                     </div>
-                                    {paciente.datosPersonalesMedicoQueAtendioConsulta.map((medi, index) => (
+                                    {paciente.medicoQueAtendioConsulta.map((medi, index) => (
                                         <div key={index}>
                                             <h4>Consulta {index + 1}:</h4>
-                                            <p><strong>Legajo:</strong> {medi.datosMedico.legajo}</p>
-                                            <p><strong>Matricula:</strong> {medi.datosMedico.matricula}</p>
-                                            <p><strong>Título:</strong> {medi.datosMedico.titulo}</p>
+                                            <p><strong>Legajo:</strong> {medi.legajo}</p>
+                                            <p><strong>Matricula:</strong> {medi.matricula}</p>
+                                            <p><strong>Título:</strong> {medi.titulo}</p>
                                         </div>
                                     ))}
                                 </div>
                             </div>
-                            <div className='row'>
-                                <div className="col-md">
-                                    <div className="container border bg-light rounded">
-                                        <h4 className="bg-light text-dark">Tratamientos farmacológicos:</h4>
-                                    </div>
-                                    {paciente.tratamientos_farmacologicos.map((trat, index) => (
-                                        <div key={index}>
-                                            <h4>Tratamiento farmacológico {index + 1}:</h4>
-                                            <p><strong>Descripción:</strong> {trat.descripcion}</p>
-                                            <p><strong>Duración:</strong> {trat.duracion}</p>
-                                            <p><strong>Fecha inicio:</strong> {trat.fecha_inicio}</p>
-                                        </div>
-                                    ))}
-                                </div>
+
+                            <div className="container border bg-light rounded">
+                                <h4 className="bg-light text-dark">Tratamientos farmacológicos:</h4>
                             </div>
-                            <div className='row'>
-                                <div className="col-md">
-                                    <div className="container border bg-light rounded">
-                                        <h4 className="bg-light text-dark">Diagnóstico de cada tratamiento:</h4>
-                                    </div>
-                                    {paciente.diagnosticos_tratamiento.map((diag, index) => (
-                                        <div key={index}>
-                                            <h4>Para el tratamiento {index + 1}:</h4>
-                                            <p><strong>Descripción:</strong> {diag.descripcion}</p>
-                                            <p><strong>Observaciones:</strong> {diag.observaciones}</p>
+                            {Object.keys(paciente.datosTratamientos).map((key) => (
+
+                                <div key={key}>
+
+
+                                    {paciente.datosTratamientos[key].map((trat, ind) => (
+                                        <div key={ind}>
+                                            <div className='row'>
+                                                <div className="col-md">
+                                                    <div>Información tratamiento:</div>
+                                                    <p><strong>Descripción:</strong> {trat.descripcion}</p>
+                                                    <p><strong>Duración:</strong> {trat.duracion}</p>
+                                                    <p><strong>Fecha inicio:</strong> {trat.fecha_inicio}</p>
+                                                </div>
+                                            </div>
+                                            <div className='row'>
+                                                <div className="col-md">
+                                                    <div className="container border bg-light rounded">
+                                                        <div className="bg-light text-dark">Diagnóstico:</div>
+                                                    </div>
+                                                    {trat.diagnosticoTratamiento.map((diag, index) => (
+                                                        <div key={index}>
+                                                            <p><strong>Descripción:</strong> {diag.descripcion}</p>
+                                                            <p><strong>Observaciones:</strong> {diag.observaciones}</p>
+                                                        </div>
+                                                    ))}
+                                                </div>
+                                            </div>
+                                            <div className='row'>
+                                                <div className="col-md">
+                                                    <div className="container border bg-light rounded">
+                                                        <div className="bg-light text-dark">Dosificación:</div>
+                                                    </div>
+                                                    {trat.dosificacionesTratamiento.map((dosif, index) => (
+                                                        <div key={index}>
+                                                            <p><strong>Dósis:</strong> {dosif.dosis}</p>
+                                                        </div>
+                                                    ))}
+                                                </div>
+                                            </div>
+                                            <div className='row'>
+                                                <div className="col-md">
+                                                    <div className="container border bg-light rounded">
+                                                        <div className="bg-light text-dark">Medicamento:</div>
+                                                    </div>
+                                                    {trat.medicamentoDosificaciones.map((med, index) => (
+                                                        <div key={index}>
+                                                            <p><strong>Droga:</strong> {med.droga}</p>
+                                                            <p><strong>Nombre:</strong> {med.nombre}</p>
+                                                            <p><strong>Presentación:</strong> {med.presentacion}</p>
+                                                        </div>
+                                                    ))}
+                                                </div>
+                                            </div>
+                                            <div className='row'>
+                                                <div className="col-md">
+                                                    <div className="container border bg-light rounded">
+                                                        <div className="bg-light text-dark">Médico que receto el tratamiento:</div>
+                                                    </div>
+                                                    {trat.medicoRecetoTratamiento.map((medi, index) => (
+                                                        <div key={index}>
+                                                            <p><strong>Legajo:</strong> {medi.legajo}</p>
+                                                            <p><strong>Matricula:</strong> {medi.matricula}</p>
+                                                            <p><strong>Título:</strong> {medi.titulo}</p>
+                                                        </div>
+                                                    ))}
+                                                </div>
+                                            </div>
                                         </div>
+
                                     ))}
+
+
+
+                                    {/*
+                                    */}
                                 </div>
-                            </div>
-                            <div className='row'>
-                                <div className="col-md">
-                                    <div className="container border bg-light rounded">
-                                        <h4 className="bg-light text-dark">Medicamento dosificado:</h4>
-                                    </div>
-                                    {paciente.medicamentoDosificado.map((med, index) => (
-                                        <div key={index}>
-                                            <h4>Tratamiento {index + 1}:</h4>
-                                            <p><strong>Droga:</strong> {med.droga}</p>
-                                            <p><strong>Nombre:</strong> {med.nombre}</p>
-                                            <p><strong>Presentación:</strong> {med.presentacion}</p>
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
-                            <div className='row'>
-                                <div className="col-md">
-                                    <div className="container border bg-light rounded">
-                                        <h4 className="bg-light text-dark">Dosificación para cada tratamiento:</h4>
-                                    </div>
-                                    {paciente.dosificacionDeCadaTratamiento.map((dosif, index) => (
-                                        <div key={index}>
-                                            <h4>Tratamiento {index + 1}:</h4>
-                                            <p><strong>Dósis:</strong> {dosif.dosis}</p>
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
-                            <div className='row'>
-                                <div className="col-md">
-                                    <div className="container border bg-light rounded">
-                                        <h4 className="bg-light text-dark">Profesional que receto el tratamiento:</h4>
-                                    </div>
-                                    {paciente.profesionalQueRecetoTratamiento.map((prof, index) => (
-                                        <div key={index}>
-                                            <h4>Tratamiento {index + 1}:</h4>
-                                            <p><strong>Nombre:</strong> {prof.nombre}</p>
-                                            <p><strong>Apellido:</strong> {prof.apellido}</p>
-                                            <p><strong>Telófono:</strong> {prof.telefono}</p>
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
+                            ))}
                         </div>
                     ))}
                 </div>

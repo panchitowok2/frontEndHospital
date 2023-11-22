@@ -26,9 +26,9 @@ const FormBuscarHistoriaClinica = ({ onSuccess, onError, id }) => {
         }
     }
     return (
-        <div className='card w-50'>
-            <h2 className='card-header'>Buscar Historia Clínica</h2>
-            <form className="card-body p-5 bg-light border rounded" onSubmit={handleSubmit(onSubmit)}>
+        <div className='card col-md-6'>
+            <div className='card-header'>Buscar Historia Clínica</div>
+            <form className="card-body p-2 " onSubmit={handleSubmit(onSubmit)}>
                 <h5>La persona fue encontrada, ahora debemos verificar que la misma no poseea historia clínica asociada.</h5>
                 <div className='d-flex justify-content-end'>
                     <button className="btn btn-primary" type="button submit">

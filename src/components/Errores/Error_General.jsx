@@ -1,5 +1,4 @@
 import Alert from 'react-bootstrap/Alert';
-import Button from 'react-bootstrap/Button';
 
 const Error_General = ({ errors }) => {
 

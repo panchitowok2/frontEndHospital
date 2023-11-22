@@ -29,7 +29,7 @@ const Pantalla4AltaHistoriaClinica = ({ id }) => {
     return (
         <div>
             {(!idHistoriaClinica && !error) ? (
-                <div className='d-flex w-100 justify-content-center'>
+                <div className=''>
                     <FormBuscarHistoriaClinica onSuccess={handleSuccess} onError={handleError} id={id} />
                 </div>
             ) : (
@@ -37,7 +37,7 @@ const Pantalla4AltaHistoriaClinica = ({ id }) => {
                     <Pantalla3AltaHistoriaClinica id={id} />
                 ) : (
                     <div>
-                        <div className='d-flex w-100 justify-content-center'>
+                        <div className=''>
                             <Error_General errors={errorsTransaction} />
                         </div>
                         <form onSubmit={handleSubmit(resetError)}>

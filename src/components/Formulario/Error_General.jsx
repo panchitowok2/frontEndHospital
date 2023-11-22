@@ -4,7 +4,7 @@ const Error_General = ({ errors }) => {
 
   return (
     errors.length > 0 &&
-    <div className="alert alert-danger mt-3 w-50">
+    <div className="alert alert-danger mt-3">
       <p> <strong> Error al procesar la transacción </strong> </p>
       <ul>
         {errors.map((error, index) => (

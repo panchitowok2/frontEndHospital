@@ -52,7 +52,7 @@ const Formulario_Informe_Paciente_Acordion = () => {
             <Mensajes_Exito messages={messages} />
             <Error_General errors={errors} />
 
-            <h1 className="fs-2"> <i className="bi bi-heart-pulse"></i> Informe de Paciente</h1>
+            <h1 className="fs-2"> <i className="bi bi-book"></i> Informe de Paciente</h1>
 
             <div className="row">
                 <div className="col-md mt-3">

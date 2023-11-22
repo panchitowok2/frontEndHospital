@@ -22,11 +22,11 @@ const FormularioAltaHistoriaClinica = ({ onSuccess, onError, id }) => {
         }
     }
     return (
-        <div className='d-flex flex-column align-items-center w-100'>
-            <h2>Formulario Alta Historia Clìnica</h2>
-            <form onSubmit={handleSubmit(onSubmit)} className="w-50">
+        <div className='card col-md-4'>
+            <div className='card-header'>Formulario Alta Historia Clínica</div>
+            <form onSubmit={handleSubmit(onSubmit)} className="card-body">
                 <div>
-                    <label>Grupo Sanguineo</label>
+                    <label>Grupo Sanguíneo</label>
                     <select className="form-select" {...register("grupo_sanguineo")}>
                         <option value='A'>A</option>
                         <option value='B'>B</option>
@@ -36,7 +36,7 @@ const FormularioAltaHistoriaClinica = ({ onSuccess, onError, id }) => {
                     {errors.nombre?.type === "required" && <p>Campo Factor Sanguineo Requerido</p>}
                 </div>
                 <div>
-                    <label>Factor Sanguineo</label>
+                    <label>Factor Sanguíneo</label>
                     <select className="form-select" {...register("factor_sanguineo")}>
                         <option value='+'>+</option>
                         <option value='-'>-</option>
@@ -44,7 +44,7 @@ const FormularioAltaHistoriaClinica = ({ onSuccess, onError, id }) => {
                     {errors.nombre?.type === 'required' && <p>Campo Grupo Sanguineo Requerido</p>}
                 </div>
 
-                <div className="p-3 d-flex justify-content-end">
+                <div className="mt-2 d-flex justify-content-end">
                     <button className="btn btn-primary" type="button submit">
                         Enviar
                     </button>

@@ -24,86 +24,109 @@ const FormAltaPersona = ({ onSuccess, onError, resetError }) => {
         }
     }
     return (
-        <div className='card d-flex mb-5'>
-            <h2 className='card-header'>Formulario Alta Persona</h2>
-            <form onSubmit={handleSubmit(onSubmit)} className="card-body p-5 bg-light rounded">
-                <div className='row'>
-                    <h3>Ingrese datos de la persona:</h3>
-                    <div className='col'>
-                        <div className="input-group">
-                            <span className='input-group-text'>Nombre</span>
-                            <input type="text" className="form-control" {...register("nombre", { required: true, maxLength: 10 })} />
+        <div className='footerSiempreAbajo m-3'>
+            <div className='col-md-6'>
+                <div className='card'>
+                    <div className='card-header'>Formulario Alta Persona</div>
+                    <form onSubmit={handleSubmit(onSubmit)} className="card-body p-3">
+                        <h5>Ingrese datos personales:</h5>
+                        <div className='row'>
+                            <div className='col-md-6'>
+                                <div className="form-floating">
+                                    <input type="text" id='nombre' className="form-control" {...register("nombre", { required: true, maxLength: 10 })} />
+                                    <label htmlFor="nombre">Nombre</label>
+                                </div>
+                                <p className={`text-danger ${errors.nombre?.type === "required" ? "" : "invisible"}`}>Nombre Requerido</p>
+                            </div>
+                            <div className='col-md-6'>
+                                <div className="form-floating">
+                                    <input type="text" className="form-control" id='apellido' {...register("apellido", { required: true, maxLength: 10 })} />
+                                    <label htmlFor="apellido">Apellido</label>
+                                </div>
+                                <p className={`text-danger ${errors.apellido?.type === "required" ? "" : "invisible"}`}>Apellido Requerido</p>
+                            </div>
+                            
                         </div>
-                        <p className={`text-danger ${errors.nombre?.type === "required" ? "" : "invisible"}`}>Nombre Requerido</p>
-                        <div className="input-group">
-                            <span className='input-group-text'>Tipo Documento</span>
-                            <select className="form-select" {...register("tipo_documento")}>
-                                <option value='DNI'>DNI</option>
-                                <option value='LI'>LI</option>
-                                <option value='LE'>LE</option>
-                            </select>
+                        <div className='row'>
+                            <div className='col-md-6'>
+                                <div className="form-floating">
+                                    <input type="date" className="form-control" id='fechaNacimiento' {...register("fecha_nacimiento", { required: true })} />
+                                    <label htmlFor="fechaNacimiento">FechaNacimiento</label>
+                                </div>
+                                <p className={`text-danger ${errors.fecha_nacimiento?.type === "required" ? "" : "invisible"}`}>Fecha Nacimiento Requerida</p>
+                            </div>
+                            <div className='col-md-6'>
+                                <div className="form-floating">
+                                    <input type="text" className="form-control" id='direccion' {...register("direccion", { required: true, maxLength: 20 })} />
+                                    <label htmlFor="direccion">Dirección</label>
+                                </div>
+                                <p className={`text-danger ${errors.direccion?.type === "required" ? "" : "invisible"}`}>Dirección Requerida</p>
+                            </div>
                         </div>
-                        <p className={`text-danger ${errors.tipo_documento?.type === "required" ? "" : "invisible"}`}>Tipo Documento Requerido</p>
-                        <div className="input-group">
-                            <span className='input-group-text'>Fecha de Nacimiento</span>
-                            <input type="date" className="form-control" {...register("fecha_nacimiento", { required: true })} />
+                        <div className='row'>
+                        <div className='col-md-6'>
+                                <div className="form-floating">
+                                    <select className="form-select" id='tipoDocumento' {...register("tipo_documento")}>
+                                        <option value='DNI'>DNI</option>
+                                        <option value='LI'>LI</option>
+                                        <option value='LE'>LE</option>
+                                    </select>
+                                    <label htmlFor="tipoDocumento">Tipo Documento</label>
+                                </div>
+                                <p className={`text-danger ${errors.tipo_documento?.type === "required" ? "" : "invisible"}`}>Tipo Documento Requerido</p>
+                            </div>
+                            <div className='col-md-6'>
+                                <div className="form-floating">
+                                    <input type="number" className="form-control" id='documento' {...register("documento", { required: true, maxLength: 10 })} />
+                                    <label htmlFor="documento">Documento</label>
+                                </div>
+                                <p className={`text-danger ${errors.documento?.type === "required" ? "" : "invisible"}`}>Documento Requerido</p>
+                            </div>
                         </div>
-                        <p className={`text-danger ${errors.fecha_nacimiento?.type === "required" ? "" : "invisible"}`}>Fecha Nacimiento Requerida</p>
-                        <div className="input-group">
-                            <span className='input-group-text'>Dirección</span>
-                            <input type="text" className="form-control" {...register("direccion", { required: true, maxLength: 20 })} />
+                        <div className='row'>
+                            <div className='col-md-6'>
+                                <div className="form-floating">
+                                    <input type="text" className="form-control" id='nacionalidad' {...register("nacionalidad", { required: true, maxLength: 10 })} />
+                                    <label htmlFor="nacionalidad">Nacionalidad</label>
+                                </div>
+                                <p className={`text-danger ${errors.nacionalidad?.type === "required" ? "" : "invisible"}`}>Nacionalidad Requerida</p>
+                            </div>
+                            <div className='col-md-6'>
+                                <div className="form-floating">
+                                    <select className="form-select" id='sexo' {...register("sexo")}>
+                                        <option value='M'>Masculino</option>
+                                        <option value='F'>Femenino</option>
+                                        <option value='X'>No Binario</option>
+                                    </select>
+                                    <label htmlFor="sexo">Sexo</label>
+                                </div>
+                                <p className={`text-danger ${errors.sexo?.type === "required" ? "" : "invisible"}`}>Sexo Requerido</p>
+                            </div>
                         </div>
-                        <p className={`text-danger ${errors.direccion?.type === "required" ? "" : "invisible"}`}>Dirección Requerida</p>
-                    </div>
-                    <div className='col'>
-                        <div className="input-group">
-                            <span className='input-group-text'>Apellido</span>
-                            <input type="text" className="form-control" {...register("apellido", { required: true, maxLength: 10 })} />
+                        <h5>Ingrese datos de contacto:</h5>
+                        <div className='row'>
+                            <div className='col-md-6'>
+                                <div className="form-floating">
+                                    <input type="text" className="form-control" id='telefono' {...register("telefono", { required: true, maxLength: 15 })} />
+                                    <label htmlFor="telefono">Teléfono</label>
+                                </div>
+                                <p className={`text-danger ${errors.telefono?.type === "required" ? "" : "invisible"}`}>Teléfono Requerido</p>
+                            </div>
+                            <div className='col-md-6'>
+                                <div className="form-floating">
+                                    <input type="email" className="form-control" id='email' {...register("email", { required: true, maxLength: 50 })} />
+                                    <label htmlFor="email">E-Mail</label>
+                                </div>
+                                <p className={`text-danger ${errors.email?.type === "required" ? "" : "invisible"}`}>Email Requerido</p>
+                            </div>
                         </div>
-                        <p className={`text-danger ${errors.apellido?.type === "required" ? "" : "invisible"}`}>Apellido Requerido</p>
-                        <div className="input-group">
-                            <span className='input-group-text'>Documento</span>
-                            <input type="number" className="form-control" {...register("documento", { required: true, maxLength: 10 })} />
+                        <div className="d-flex justify-content-end">
+                            <button className="btn btn-primary mt-2" type="submit">Enviar</button>
                         </div>
-                        <p className={`text-danger ${errors.documento?.type === "required" ? "" : "invisible"}`}>Documento Requerido</p>
-                        <div className="input-group">
-                            <span className='input-group-text'>Nacionalidad</span>
-                            <input type="text" className="form-control" {...register("nacionalidad", { required: true, maxLength: 10 })} />
-                        </div>
-                        <p className={`text-danger ${errors.nacionalidad?.type === "required" ? "" : "invisible"}`}>Nacionalidad Requerida</p>
-                        <div className="input-group">
-                            <span className='input-group-text'>Sexo</span>
-                            <select className="form-select" {...register("sexo")}>
-                                <option value='M'>M</option>
-                                <option value='F'>F</option>
-                            </select>
-                        </div>
-                        <p className={`text-danger ${errors.sexo?.type === "required" ? "" : "invisible"}`}>Sexo Requerido</p>
-                    </div>
+                    </form>
                 </div>
-                <div className='row'>
-                    <h3>Ingrese datos de contacto:</h3>
-                    <div className='col'>
-                        <div className="input-group">
-                            <span className='input-group-text'>Teléfono</span>
-                            <input type="text" className="form-control" {...register("telefono", { required: true, maxLength: 15 })} />
-                        </div>
-                        <p className={`text-danger ${errors.telefono?.type === "required" ? "" : "invisible"}`}>Teléfono Requerido</p>
-                    </div>
-                    <div className='col'>
-                        <div className="input-group">
-                            <span className='input-group-text'>E-mail</span>
-                            <input type="email" className="form-control" {...register("email", { required: true, maxLength: 50 })} />
-                        </div>
-                        <p className={`text-danger ${errors.email?.type === "required" ? "" : "invisible"}`}>Email Requerido</p>
-                    </div>
-                </div>
-                <div className="d-flex justify-content-end">
-                    <button className="btn btn-primary mt-2" type="submit">Enviar</button>
-                </div>
-            </form>
+            </div>
         </div>
-
     );
 
 }
