@@ -23,6 +23,9 @@ const Formulario_alta_consulta_diagnostico = () => {
   const [sexo, setSexo] = useState("");
   const [medicos, setMedicos] = useState([]);
   const [persona, setPersona] = useState("");
+  const [expandirmenu1, setexpandir1]=useState(false);
+  const [expandirmenu2, setexpandir2]=useState(true);
+  const [expandirmenu3, setexpandir3]=useState(true);
   const personaDatos = {
     tipoDocumento,
     setTipoDocumento,
@@ -36,6 +39,9 @@ const Formulario_alta_consulta_diagnostico = () => {
     setPersona,
     setErrors,
     setMedicos,
+    setexpandir1,
+    setexpandir2,
+    setexpandir3
   };
   //datos para la segunda pestaña
   const [fechaTurno, setFechaTurno] = useState("");
@@ -44,6 +50,7 @@ const Formulario_alta_consulta_diagnostico = () => {
   const [hora2, sethora2] = useState("")
   const [turnos, setTurnos] = useState([]);
   const [turnoElegido, setTurnoElegido] = useState("");
+
   const datos_turno={
     persona,
     fechaTurno,
@@ -53,7 +60,10 @@ const Formulario_alta_consulta_diagnostico = () => {
     setErrors,
     setFechaTurno,
     setMedico,
-    medicos
+    medicos,
+    setexpandir1,
+    setexpandir2,
+    setexpandir3
   }
 
   const { isAuthenticated } = useAuth0();
@@ -92,7 +102,8 @@ const Formulario_alta_consulta_diagnostico = () => {
     medico,
     setErrors,
     persona,
-    setMessages
+    setMessages,
+ 
   }
 
   
@@ -135,7 +146,7 @@ const Formulario_alta_consulta_diagnostico = () => {
 
               <div
                 id="buscarPaciente"
-                className="accordion-collapse collapse show"
+                className={`accordion-collapse collapse ${expandirmenu1 ? '' : 'show'}`}
                 aria-labelledby="headingOne"
               >
                 <div className="accordion-body">
@@ -143,6 +154,7 @@ const Formulario_alta_consulta_diagnostico = () => {
                 </div>
               </div>
             </div>
+
 
             <div className="accordion-item">
               <h2 className="accordion-header" id="headingTwo">
@@ -160,7 +172,7 @@ const Formulario_alta_consulta_diagnostico = () => {
 
               <div
                 id="seleccionarMedicoFecha"
-                className="accordion-collapse collapse"
+                className={`accordion-collapse collapse ${expandirmenu2 ? '' : 'show'}`}
                 aria-labelledby="headingTwo"
               >
                 <div className="accordion-body">
@@ -190,7 +202,7 @@ const Formulario_alta_consulta_diagnostico = () => {
               </h2>
               <div
                 id="datosConsultaDiagnostico"
-                className="accordion-collapse collapse"
+                className={`accordion-collapse collapse ${expandirmenu3 ? '' : 'show'}`}
                 aria-labelledby="headingThree"
               >
                 <div className="accordion-body">
