@@ -120,7 +120,7 @@ const Formulario_Consulta_Medicamentos_Mas_Recetados = () => {
     <div className='m-3 footerSiempreAbajo'>
       <Error_General errors={errors} />
       
-      <h2 class="mt-3"> <i class="bi bi-capsule-pill"></i> Consultar medicamentos más recetados</h2>
+      <h2 className="mt-3"> <i className="bi bi-capsule-pill"></i> Consultar medicamentos más recetados</h2>
 
       <div className="row mt-3">
         <div className="col-md-9">
@@ -140,15 +140,17 @@ const Formulario_Consulta_Medicamentos_Mas_Recetados = () => {
       <form onSubmit={handleSubmit}>
         <div className="row">
           <div className="col-md-6">
-            <div class="form-floating">
-              <select class="form-select" id="especialidad" aria-label="Seleccion de Especialidad" value={especialidad} onChange={(e) => setEspecialidad(e.target.value)} required>
-              <option selected value="">Seleccioná una opción</option>
-                {especialidades.map((especialidad) => (
-                  <option value={especialidad._id}>{especialidad.nombre}</option>
-                ))}
-              </select>
+            <div className="form-floating">
+            <select className="form-select" id="especialidad" aria-label="Seleccion de Especialidad" defaultValue={especialidad} onChange={(e) => setEspecialidad(e.target.value)} required>
+              <option value="">Seleccioná una opción</option>
+              {especialidades.map((especialidad) => (
+                <option key={especialidad._id} value={especialidad._id}>
+                  {especialidad.nombre}
+                </option>
+              ))}
+            </select>
 
-              <label for="especialidad">Especialidad</label>
+            <label>Especialidad</label>
             </div>
 
             {errorEspecialidad && <div className="text-danger"> {errorEspecialidad}</div>}
@@ -157,16 +159,16 @@ const Formulario_Consulta_Medicamentos_Mas_Recetados = () => {
         
         <div className="row">
           <div className="col">
-            <div class="form-floating mt-3">
-              <input type="date" class="form-control" id="fechaInicio" value={fechaInicio} onChange={(e) => setFechaInicio(e.target.value)} required/>
-              <label for="fechaInicio">Fecha de inicio</label>
+            <div className="form-floating mt-3">
+              <input type="date" className="form-control" id="fechaInicio" value={fechaInicio} onChange={(e) => setFechaInicio(e.target.value)} required/>
+              <label>Fecha de inicio</label>
             </div>
           </div>
 
           <div className="col">
-            <div class="form-floating mt-3">
-              <input type="date" class="form-control" id="fechaFin" value={fechaFin} onChange={(e) => setFechaFin(e.target.value)} required/>
-              <label for="fechaFin">Fecha de fin</label>
+            <div className="form-floating mt-3">
+              <input type="date" className="form-control" id="fechaFin" value={fechaFin} onChange={(e) => setFechaFin(e.target.value)} required/>
+              <label>Fecha de fin</label>
             </div>
           </div>
 
@@ -177,12 +179,12 @@ const Formulario_Consulta_Medicamentos_Mas_Recetados = () => {
       </form>
 
       {medicamentosMasRecetados.length > 0 && 
-      <div class="row">
-        <div class="col-md-8 mt-4">
+      <div className="row">
+        <div className="col-md-8 mt-4">
           <TablaMedicamentosMasRecetados medicamentosMasRecetados={medicamentosMasRecetados} />
         </div>
 
-        <div class="col-md-4 justify-content-center mt-4">
+        <div className="col-md-4 justify-content-center mt-4">
           <GraficoMedicamentosMasRecetados medicamentosMasRecetados={medicamentosMasRecetados} />
         </div>
       </div>

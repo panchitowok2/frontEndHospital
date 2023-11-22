@@ -37,6 +37,7 @@ function Header() {
                     <li><Link to="/tratamientoFarmacologico/alta_tratamiento" className='dropdown-item'>Alta Tratamiento Farmacológico</Link></li>
                   </ul>
                 </li>
+
                 <li className="nav-item dropdown">
                   <a className="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                     Consulta
@@ -55,6 +56,7 @@ function Header() {
                     <li><Link to="/medicamento/medicamentos_mas_recetados" className='dropdown-item'>Medicamentos más recetados</Link></li>
                   </ul>
                 </li>
+
                 <li className="nav-item dropdown">
                   <a className="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                     Paciente
@@ -63,6 +65,7 @@ function Header() {
                     <li><Link to="/paciente/informe_paciente" className='dropdown-item'>Informe de paciente</Link></li>
                   </ul>
                 </li>
+
                 <li className="nav-item dropdown">
                   <a className="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                     Historia Clinica
@@ -71,6 +74,7 @@ function Header() {
                     <li><Link to="/historia-clinica/alta_historia_clinica" className='dropdown-item'>Alta Historia Clinica</Link></li>
                   </ul>
                 </li>
+                
               </React.Fragment>
             ) : (
               <React.Fragment>

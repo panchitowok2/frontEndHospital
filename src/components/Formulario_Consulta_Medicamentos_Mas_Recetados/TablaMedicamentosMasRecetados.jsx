@@ -6,7 +6,7 @@ const Tabla_Medicamentos_Mas_Recetados = ({ medicamentosMasRecetados }) => {
 
   return (
     <div className="table-responsive">
-      <table class="table table-striped">
+      <table className="table table-striped">
         <thead>
           <tr>
             <th scope="col">#</th>
