@@ -13,8 +13,9 @@ function App() {
     <Router>
       <div className="container-fluid min-vh-100 m-0 p-0">
         <Header />
+
         <Routes>
-        <Route path="/" element={<Content />} />
+          <Route path="/" element={<Content />} />
           <Route path="/paciente/informe_paciente" element={<Pantalla1InformePaciente />} />                        
           <Route path="/historia-clinica/alta_historia_clinica" element={<Pantalla1AltaHistoriaClinica />} />
           <Route path="/tratamientoFarmacologico/alta_tratamiento" element={<Formulario_Alta_Tratamiento_Farmacologico/>} />
@@ -22,6 +23,7 @@ function App() {
           <Route path="/consulta/consultas_por_enfermedad" element={<ConsultasPorEnfermedad/>} />
           <Route path="/medicamento/medicamentos_mas_recetados" element={<MedMasRecetados/>} />
         </Routes>
+
         <Footer />
       </div>
     </Router>
