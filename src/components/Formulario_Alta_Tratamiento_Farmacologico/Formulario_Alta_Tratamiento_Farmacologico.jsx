@@ -32,6 +32,8 @@ const Formulario_Alta_Tratamiento_Farmacologico = () => {
   const [duracion, setDuracion] = useState("");
   const [dosificaciones, setDosificaciones] = useState([]);
 
+  const [id, setId] = useState("");
+
   const personaState = {
     tipoDocumento,
     setTipoDocumento,
@@ -47,7 +49,8 @@ const Formulario_Alta_Tratamiento_Farmacologico = () => {
     setHistoriaClinica,
     buscandoPersona,
     setBuscandoPersona,
-    setErrors
+    setErrors,
+    setId
   };
 
   const diagnosticoState = {
