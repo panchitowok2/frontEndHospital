@@ -12,9 +12,10 @@ import { obtener_turnos } from "../../funcionesJS/funciones_turnos.js";
 import Buscar_paciente from "./Buscar_paciente.jsx";
 import Seleccionar_medico_fecha_y_hora from "./Seleccionar_medico_fecha_y_hora.jsx";
 import Datos_consulta_y_diagnostico from "./Datos_consulta_y_diagnostico.jsx";
+import Mensajes_Exito from '../Mensajes_Exito/Mensajes_Exito';
 const Formulario_alta_consulta_diagnostico = () => {
   const [errors, setErrors] = useState([]);
-
+  const [messages, setMessages] = useState([])
   //datos para buscar y setear datos del paciente ademas de cargar los medicos
   const [tipoDocumento, setTipoDocumento] = useState("");
   const [documento, setDocumento] = useState("");
@@ -90,7 +91,8 @@ const Formulario_alta_consulta_diagnostico = () => {
     turnos,
     medico,
     setErrors,
-    persona
+    persona,
+    setMessages
   }
 
   
@@ -108,7 +110,8 @@ const Formulario_alta_consulta_diagnostico = () => {
   
 
   return (
-    <div className="ms-5 me-5 footerSiempreAbajo"> 
+    <div className="m-3 footerSiempreAbajo"> 
+    <Mensajes_Exito messages={messages} />
       <Error_General errors={errors} />
 
       <h1 className="fs-2 mb-3"> Registrar Consulta y Diagnostico</h1>

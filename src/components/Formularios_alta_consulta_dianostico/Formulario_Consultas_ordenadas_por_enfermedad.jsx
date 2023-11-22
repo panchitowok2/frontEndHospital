@@ -4,11 +4,12 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { obtener_enfermedades } from "../../funcionesJS/funciones_enfermedades.js";
 import { obtener_consultas_por_enfermedad } from "../../funcionesJS/funciones_consultas.js";
 import "./estilos.css";
+import Mensajes_Exito from '../Mensajes_Exito/Mensajes_Exito';
 
 const Formulario_Consultas_ordenadas_por_enfermedad = () => {
   const [errors, setErrors] = useState([]);
   const [enfermedades, set_enfermedades] = useState([]);
-
+  const [messages, setMessages] = useState([])
   // variables del formulario
   const [enfermedad, set_enfermedad] = useState("");
   const [fechaInicio, setFechaInicio] = useState("");
@@ -27,6 +28,7 @@ const Formulario_Consultas_ordenadas_por_enfermedad = () => {
       console.log(resultado);
       set_consultas(resultado);
       setErrors([]);
+      setMessages(['consultas encontradas.'])
     } catch (error) {
       setErrors([error.message]);
       set_consultas([]);
@@ -46,7 +48,8 @@ const Formulario_Consultas_ordenadas_por_enfermedad = () => {
     return <h1>no estas logeado reeeee</h1>;
   }
   return (
-    <div className="ms-5 me-5 footerSiempreAbajo">
+    <div className="m-3 footerSiempreAbajo">
+         <Mensajes_Exito messages={messages} />
       {errors.length > 0 && (
         <div class="alert alert-danger mt-3">
           <p>
@@ -77,11 +80,11 @@ const Formulario_Consultas_ordenadas_por_enfermedad = () => {
             onChange={(e) => set_enfermedad(e.target.value)}
             required
           >
-            <option selected value="">
+            <option value="">
               Seleccioná una opción
             </option>
             {enfermedades.map((enfermedad) => (
-              <option value={enfermedad._id}>{enfermedad.nombre}</option>
+              <option key={enfermedad._id} value={enfermedad._id}>{enfermedad.nombre}</option>
             ))}
           </select>
           <label for="enfermedad">Enfermedad</label>

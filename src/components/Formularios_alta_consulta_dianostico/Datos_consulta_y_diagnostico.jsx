@@ -24,7 +24,8 @@ const Datos_consulta_y_diagnostico = ({ state }) => {
     turnos,
     medico,
     setErrors,
-    persona
+    persona,
+    setMessages
   }=state
   useEffect(() => {
     const fetchData = async () => {
@@ -45,6 +46,7 @@ const Datos_consulta_y_diagnostico = ({ state }) => {
     try {
       const resultado=await alta_consulta_y_diagnostico(sintomasConsulta,observacionConsulta,fechaConsulta,turnoElegido,observacionDiagnostico,descripcionDiagnostico,enfermedad,persona.historia_clinica)
       console.log("resultado = "+resultado);
+      setMessages(['consulta y diagonostico creados exitosamente.'])
     } catch (error) {
       setErrors([error.message]);
     }
@@ -65,7 +67,7 @@ const Datos_consulta_y_diagnostico = ({ state }) => {
               setFechaConsulta(fechaSeleccionada);}}
             required
           >
-            <option selected value="">
+            <option value="">
               Seleccioná una opción
             </option>
             {turnos.map((turno) => (
