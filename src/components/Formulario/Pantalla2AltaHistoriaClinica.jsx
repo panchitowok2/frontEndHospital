@@ -43,7 +43,7 @@ const Pantalla2AltaHistoriaClinica = ({ resetError }) => {
                     <div>
                         <ErrorGeneral errors={errorsTransaction} />
                         <form onSubmit={handleSubmit(resetError)}>
-                            <div className="d-flex flex-column align-items-center">
+                            <div className="">
                                 <Link to="/">
                                     <button className='btn btn-primary' type="button submit">Ir a la página principal</button>
                                 </Link>
@@ -51,7 +51,7 @@ const Pantalla2AltaHistoriaClinica = ({ resetError }) => {
                         </form>
                     </div>
                 ) : (
-                    <div className='d-flex w-100 justify-content-center'>
+                    <div className=''>
                         <MensajeExito messages={mensajeExito} />
                         <Pantalla3AltaHistoriaClinica id={idPersona} />
                     </div>

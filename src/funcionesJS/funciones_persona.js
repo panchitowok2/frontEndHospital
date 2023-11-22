@@ -24,7 +24,6 @@ const buscarIdPersona = async (tipo_documento, documento, apellido, sexo) => {
 
     return data;
   } catch (error) {
-    console.error('Error al obtener los datos de la persona:', error.message);
     throw error;
   }
 };

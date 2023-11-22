@@ -30,7 +30,7 @@ const Pantalla1AltaHistoriaClinica = () => {
         return (<h1> No estas logeado </h1>)
     }
     return (
-        <div className='m-3 footer-siempre-abajo'>
+        <div className='m-3 footerSiempreAbajo'>
             <h1 className="fs-2"> <i className="bi bi-pen"></i> Registrar Historia Clínica</h1>
             {!idPersona && !error ? (
                 <div className='row'>
