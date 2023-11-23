@@ -5,6 +5,7 @@ import Ficha_Paciente from '../Formulario_Alta_Tratamiento_Farmacologico/Ficha_P
 import Error_General from '../Errores/Error_General';
 import Mensajes_Exito from '../Mensajes_Exito/Mensajes_Exito';
 import Informe from './Pantalla_Informe_Acordion.jsx'
+import Tratamientos from './Form_Tratamientos_Farmacologicos.jsx';
 
 const Formulario_Informe_Paciente_Acordion = () => {
     const [errors, setErrors] = useState([]);
@@ -78,7 +79,7 @@ const Formulario_Informe_Paciente_Acordion = () => {
                         <div className="accordion-item">
                             <h2 className="accordion-header" id="headingTwo">
                                 <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                    2. Informe
+                                    2. Datos de Consultas
                                 </button>
                             </h2>
                             <div id="collapseTwo" className="accordion-collapse collapse" aria-labelledby="headingTwo">
@@ -87,7 +88,18 @@ const Formulario_Informe_Paciente_Acordion = () => {
                                 </div>
                             </div>
                         </div>
-
+                        <div className="accordion-item">
+                            <h2 className="accordion-header" id="headingThree">
+                                <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                    3. Datos de Tratamientos Farmacológicos
+                                </button>
+                            </h2>
+                            <div id="collapseThree" className="accordion-collapse collapse" aria-labelledby="headingThree">
+                                <div className="accordion-body">
+                                    <Tratamientos id={id} />
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
