@@ -62,7 +62,7 @@ const Seleccionar_medico_fecha_y_hora = ({ state }) => {
               required
             >
               <option selected value="">
-                Seleccioná una opción
+                Selecciona una opción
               </option>
               {medicos.map((medico) => (
                 <option key= {medico._id} value={medico._id}>
@@ -70,7 +70,7 @@ const Seleccionar_medico_fecha_y_hora = ({ state }) => {
                 </option>
               ))}
             </select>
-            <label for="medico">medico</label>
+            <label for="medico">Médico</label>
           </div>
 
         </div>
@@ -79,7 +79,7 @@ const Seleccionar_medico_fecha_y_hora = ({ state }) => {
       <input
         type="submit"
         class="btn btn-primary mb-3"
-        value="buscar turnos"
+        value="Buscar Turnos"
       />
     </form>);
 }

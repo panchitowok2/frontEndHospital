@@ -138,6 +138,21 @@ const Buscar_paciente = ({ state }) => {
               Masculino
             </label>
           </div>
+
+          <div className="form-check form-check-inline">
+            <input
+              className="form-check-input"
+              type="radio"
+              name="sexo"
+              id="sexoNoBinario"
+              value="X"
+              onChange={(e) => setSexo(e.target.value)}
+              required
+            />
+            <label className="form-check-label" htmlFor="sexoNoBinario">
+              No Binario
+            </label>
+          </div>
         </div>
 
         <div class="col-md mt-3">

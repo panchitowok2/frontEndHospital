@@ -54,7 +54,16 @@ const Formulario_Informe_Paciente_Acordion = () => {
             <Error_General errors={errors} />
 
             <h1 className="fs-2"> <i className="bi bi-book"></i> Informe de Paciente</h1>
-
+            <div className="row mt-3">
+                <div className="col-md-9">
+                    <p>
+                        Ahora podes ver los datos de tus consultas y tus tratamientos farmacológicos en un solo lugar.
+                    </p>
+                    <p>
+                        Debes ingresar la información del paciente, y si existe, se cargaran sus datos en los menús desplegables que se encuentran a continuación.
+                    </p>
+                </div>
+            </div>
             <div className="row">
                 <div className="col-md mt-3">
                     <div className="accordion" id="accordionExample">
@@ -84,7 +93,7 @@ const Formulario_Informe_Paciente_Acordion = () => {
                             </h2>
                             <div id="collapseTwo" className="accordion-collapse collapse" aria-labelledby="headingTwo">
                                 <div className="accordion-body">
-                                <Informe id={id}/>
+                                    <Informe id={id} />
                                 </div>
                             </div>
                         </div>

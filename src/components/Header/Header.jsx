@@ -65,7 +65,11 @@ function Header() {
                     <li><Link to="/medicamento/medicamentos_mas_recetados" className='dropdown-item'>Buscar medicamentos más recetados</Link></li>
                   </ul>
                 </li>
-
+                <div className="d-md-none">
+                  <li className="nav-item">
+                    <a className="nav-link text-white" href='#' onClick={() => logout({ logoutParams: { returnTo: window.location.origin } })}> Cerrar sesión </a>
+                  </li>
+                </div>
               </React.Fragment>
             ) : (
               <React.Fragment>
@@ -78,6 +82,9 @@ function Header() {
                 <li className="nav-item">
 
                   <Link to="/contacto" className='nav-link text-white'>Contactános</Link>
+                </li>
+                <li className="nav-item">
+                  <a className="nav-link text-white" href='#' onClick={() => loginWithRedirect()}>Iniciar sesión</a>
                 </li>
               </React.Fragment>
             )}

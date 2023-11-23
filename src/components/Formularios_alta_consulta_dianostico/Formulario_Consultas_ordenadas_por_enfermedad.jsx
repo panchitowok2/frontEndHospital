@@ -40,16 +40,16 @@ const Formulario_Consultas_ordenadas_por_enfermedad = () => {
       try {
         const data = await obtener_enfermedades();
         set_enfermedades(data);
-      } catch (error) {}
+      } catch (error) { }
     };
     fetchData();
   }, []);
   if (!isAuthenticated) {
-    return <h1>no estas logeado reeeee</h1>;
+    return <h1>No estas logeado</h1>;
   }
   return (
     <div className="m-3 footerSiempreAbajo">
-         <Mensajes_Exito messages={messages} />
+      <Mensajes_Exito messages={messages} />
       {errors.length > 0 && (
         <div class="alert alert-danger mt-3">
           <p>
@@ -66,57 +66,66 @@ const Formulario_Consultas_ordenadas_por_enfermedad = () => {
           </ul>
         </div>
       )}
-      <h2 class="mb-3">
-        {" "}
+      <h1 class="fs-2">
+        <i className="me-2 bi bi-search-heart"></i>
         Buscar consultas por una enfermedad
-      </h2>
+      </h1>
       <form class="mb-3" onSubmit={handleSubmit}>
-        <div class="form-floating mb-3 w-50">
-          <select
-            class="form-select"
-            id="enfermedad"
-            aria-label="Seleccion de enfermedad"
-            value={enfermedad}
-            onChange={(e) => set_enfermedad(e.target.value)}
-            required
-          >
-            <option value="">
-              Seleccioná una opción
-            </option>
-            {enfermedades.map((enfermedad) => (
-              <option key={enfermedad._id} value={enfermedad._id}>{enfermedad.nombre}</option>
-            ))}
-          </select>
-          <label for="enfermedad">Enfermedad</label>
+        <div className="row">
+          <div className="col-md-6">
+            <div class="form-floating mb-3">
+              <select
+                class="form-select"
+                id="enfermedad"
+                aria-label="Seleccion de enfermedad"
+                value={enfermedad}
+                onChange={(e) => set_enfermedad(e.target.value)}
+                required
+              >
+                <option value="">
+                  Seleccioná una opción
+                </option>
+                {enfermedades.map((enfermedad) => (
+                  <option key={enfermedad._id} value={enfermedad._id}>{enfermedad.nombre}</option>
+                ))}
+              </select>
+              <label for="enfermedad">Enfermedad</label>
+            </div>
+          </div>
         </div>
-
-        <div class="form-floating mb-3 w-50">
-          <input
-            type="date"
-            class="form-control"
-            id="fechaInicio"
-            value={fechaInicio}
-            onChange={(e) => setFechaInicio(e.target.value)}
-            required
-          />
-          <label for="fechaInicio">Fecha de inicio</label>
+        <div className="row">
+          <div className="col-md-6">
+            <div class="form-floating mb-3">
+              <input
+                type="date"
+                class="form-control"
+                id="fechaInicio"
+                value={fechaInicio}
+                onChange={(e) => setFechaInicio(e.target.value)}
+                required
+              />
+              <label for="fechaInicio">Fecha de inicio</label>
+            </div>
+          </div>
         </div>
-
-        <div class="form-floating mb-3 w-50">
-          <input
-            type="date"
-            class="form-control"
-            id="fechaFin"
-            value={fechaFin}
-            onChange={(e) => setFechaFin(e.target.value)}
-            required
-          />
-          <label for="fechaFin">Fecha de fin</label>
+        <div className="row">
+          <div className="col-md-6">
+            <div class="form-floating mb-3/">
+              <input
+                type="date"
+                class="form-control"
+                id="fechaFin"
+                value={fechaFin}
+                onChange={(e) => setFechaFin(e.target.value)}
+                required
+              />
+              <label for="fechaFin">Fecha de fin</label>
+            </div>
+          </div>
         </div>
-
         <input
           type="submit"
-          class="btn btn-primary mb-3"
+          class="btn btn-primary mt-3"
           value="Realizar Consulta"
         />
       </form>
@@ -148,106 +157,106 @@ const Formulario_Consultas_ordenadas_por_enfermedad = () => {
                       aria-expanded="false"
                     >
                       <div className="">
-                      <p><b>Fecha:</b> {consulta.consulta.fecha_consulta}</p>
+                        <p><b>Fecha:</b> {consulta.consulta.fecha_consulta}</p>
                       </div>
 
 
                       <div className="d-flex flex-wrap">
-                      <div className="col-md-2 me-5 mb-4" >
-                        <h4 >Datos del paciente:</h4>
-                        <p className="mb-2">
-                          <b>Nombre:</b> {consulta.consulta.paciente_consulta.nombre}{" "}
-                          {consulta.consulta.paciente_consulta.apellido}
-                        </p>
-                        <p className="mb-2">
-                          <b>Tipo de documento: </b>{consulta.consulta.paciente_consulta.tipo_documento}{" "}
-                        </p>
-                        <p className="mb-2">
-                        <b>Número:</b> {consulta.consulta.paciente_consulta.documento}
-                        </p>
-                        <p className="mb-2"><b>Sexo:</b> {consulta.consulta.paciente_consulta.sexo}</p>
-                        <p className="mb-2">
-                        <b>Dirección:</b> {consulta.consulta.paciente_consulta.direccion}
-                        </p>
-                        <p className="mb-2">
-                        <b>Teléfono:</b>
-                          {consulta.consulta.paciente_consulta.telefono}
-                        </p>
-                      </div>
-                      <div className="col-md-2 me-5 mb-4">
-                      <h4>Síntomas:</h4>
-                        <p className="mb-2"><b>Síntomas:</b> {consulta.consulta.sintomas}</p>
-                        <p className="mb-2"><b>Observaciones:</b> {consulta.consulta.observacion} </p>
-                      </div>
-                      <div className="col-md-2 me-5 mb-4">
-                        <h4>Médico: </h4>
-                        <p className="mb-2">
-                          <b>Nombre:</b> {consulta.consulta.medico_consulta.nombre}{" "}
-                          {consulta.consulta.medico_consulta.apellido}
-                        </p>
-                        <p className="mb-2"><b>Legajo:</b> {consulta.consulta.medico_consulta.legajo}</p>
-                      </div>
-                      <div className="col-md-2 me-5 mb-4">
-                        <h4>Diagnóstico</h4>
-                        <p className="mb-2"> 
-                          <b>Observaciones:</b> {consulta.consulta.diagnostico.observaciones}
-                        </p>
-                        <p className="mb-2 ">
-                          <b>Enfermedad:</b> {consulta.consulta.diagnostico.enfermedad}
-                        </p>
-                      </div>
+                        <div className="col-md-2 me-5 mb-4" >
+                          <h4 >Datos del paciente:</h4>
+                          <p className="mb-2">
+                            <b>Nombre:</b> {consulta.consulta.paciente_consulta.nombre}{" "}
+                            {consulta.consulta.paciente_consulta.apellido}
+                          </p>
+                          <p className="mb-2">
+                            <b>Tipo de documento: </b>{consulta.consulta.paciente_consulta.tipo_documento}{" "}
+                          </p>
+                          <p className="mb-2">
+                            <b>Número:</b> {consulta.consulta.paciente_consulta.documento}
+                          </p>
+                          <p className="mb-2"><b>Sexo:</b> {consulta.consulta.paciente_consulta.sexo}</p>
+                          <p className="mb-2">
+                            <b>Dirección:</b> {consulta.consulta.paciente_consulta.direccion}
+                          </p>
+                          <p className="mb-2">
+                            <b>Teléfono:</b>
+                            {consulta.consulta.paciente_consulta.telefono}
+                          </p>
+                        </div>
+                        <div className="col-md-2 me-5 mb-4">
+                          <h4>Síntomas:</h4>
+                          <p className="mb-2"><b>Síntomas:</b> {consulta.consulta.sintomas}</p>
+                          <p className="mb-2"><b>Observaciones:</b> {consulta.consulta.observacion} </p>
+                        </div>
+                        <div className="col-md-2 me-5 mb-4">
+                          <h4>Médico: </h4>
+                          <p className="mb-2">
+                            <b>Nombre:</b> {consulta.consulta.medico_consulta.nombre}{" "}
+                            {consulta.consulta.medico_consulta.apellido}
+                          </p>
+                          <p className="mb-2"><b>Legajo:</b> {consulta.consulta.medico_consulta.legajo}</p>
+                        </div>
+                        <div className="col-md-2 me-5 mb-4">
+                          <h4>Diagnóstico</h4>
+                          <p className="mb-2">
+                            <b>Observaciones:</b> {consulta.consulta.diagnostico.observaciones}
+                          </p>
+                          <p className="mb-2 ">
+                            <b>Enfermedad:</b> {consulta.consulta.diagnostico.enfermedad}
+                          </p>
+                        </div>
 
-                      <div className="col-md-2 me-5 mb-4">
-                        <h4>Tratamiento:</h4>
-                        {consulta.consulta.diagnostico
-                          .tratamiento_farmacologico != null ? (
-                          <>
-                            <p className="mb-2">
-                            <b>Descripción:</b> {
-                                consulta.consulta.diagnostico
-                                  .tratamiento_farmacologico
-                                  .descripcion_tratamiento_farmacologico
-                              }
-                            </p>
-                            <p className="mb-2">
-                              <b>Medicamento:</b> {
-                                consulta.consulta.diagnostico
-                                  .tratamiento_farmacologico.nombre_medicamento
-                              }
-                            </p>
-                            <p className="mb-2">
-                            <b>Presentación:</b> {
-                                consulta.consulta.diagnostico
-                                  .tratamiento_farmacologico
-                                  .presentacion_medicamento
-                              }
-                            </p>
-                            <p className="mb-2">
-                              <b>Dosis:</b> {
-                                consulta.consulta.diagnostico
-                                  .tratamiento_farmacologico.dosis
-                              }
-                            </p>
-                            <p className="mb-2">
-                              <b>Fecha de inicio del tratamiento:</b> {
-                                consulta.consulta.diagnostico
-                                  .tratamiento_farmacologico.fecha_inicio
-                              }
-                            </p>
-                            <p className="mb-2">
-                            <b>Duración:</b> {
-                                consulta.consulta.diagnostico
-                                  .tratamiento_farmacologico.duracion
-                              }
-                            </p>
-                          </>
-                        ) : (
-                          // Renderizar otro contenido si el tratamiento es nulo
-                          <p className="mb-2">No hay tratamiento registrado.</p>
-                        )}</div>
-                     
+                        <div className="col-md-2 me-5 mb-4">
+                          <h4>Tratamiento:</h4>
+                          {consulta.consulta.diagnostico
+                            .tratamiento_farmacologico != null ? (
+                            <>
+                              <p className="mb-2">
+                                <b>Descripción:</b> {
+                                  consulta.consulta.diagnostico
+                                    .tratamiento_farmacologico
+                                    .descripcion_tratamiento_farmacologico
+                                }
+                              </p>
+                              <p className="mb-2">
+                                <b>Medicamento:</b> {
+                                  consulta.consulta.diagnostico
+                                    .tratamiento_farmacologico.nombre_medicamento
+                                }
+                              </p>
+                              <p className="mb-2">
+                                <b>Presentación:</b> {
+                                  consulta.consulta.diagnostico
+                                    .tratamiento_farmacologico
+                                    .presentacion_medicamento
+                                }
+                              </p>
+                              <p className="mb-2">
+                                <b>Dosis:</b> {
+                                  consulta.consulta.diagnostico
+                                    .tratamiento_farmacologico.dosis
+                                }
+                              </p>
+                              <p className="mb-2">
+                                <b>Fecha de inicio del tratamiento:</b> {
+                                  consulta.consulta.diagnostico
+                                    .tratamiento_farmacologico.fecha_inicio
+                                }
+                              </p>
+                              <p className="mb-2">
+                                <b>Duración:</b> {
+                                  consulta.consulta.diagnostico
+                                    .tratamiento_farmacologico.duracion
+                                }
+                              </p>
+                            </>
+                          ) : (
+                            // Renderizar otro contenido si el tratamiento es nulo
+                            <p className="mb-2">No hay tratamiento registrado.</p>
+                          )}</div>
 
-                     </div>
+
+                      </div>
 
 
                     </div>
@@ -257,7 +266,7 @@ const Formulario_Consultas_ordenadas_por_enfermedad = () => {
             ))}
           </div>
 
-         
+
         </div>
       )}
     </div>

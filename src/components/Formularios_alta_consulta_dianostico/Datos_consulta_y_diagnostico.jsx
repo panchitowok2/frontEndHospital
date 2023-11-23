@@ -2,22 +2,22 @@ import React, { useState, useEffect } from "react";
 import { obtener_enfermedades } from "../../funcionesJS/funciones_enfermedades.js";
 import { alta_consulta_y_diagnostico } from "../../funcionesJS/funciones_diagnosticos.js";
 const Datos_consulta_y_diagnostico = ({ state }) => {
-  const{
+  const {
     sintomasConsulta,
     setSintomasConsulta,
-    observacionConsulta, 
+    observacionConsulta,
     setObservacionConsulta,
-    fechaConsulta, 
+    fechaConsulta,
     setFechaConsulta,
-    observacionDiagnostico, 
+    observacionDiagnostico,
     setObservacionDiagnostico,
-    descripcionDiagnostico, 
+    descripcionDiagnostico,
     setDescripcionDiagnostico,
-    enfermedades, 
+    enfermedades,
     set_enfermedades,
-    enfermedad, 
+    enfermedad,
     set_enfermedad,
-    historiaClinica, 
+    historiaClinica,
     setHistoriaClinica,
     turnoElegido,
     setTurnoElegido,
@@ -26,7 +26,7 @@ const Datos_consulta_y_diagnostico = ({ state }) => {
     setErrors,
     persona,
     setMessages
-  }=state
+  } = state
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -40,12 +40,12 @@ const Datos_consulta_y_diagnostico = ({ state }) => {
   }, []);
 
 
-  
-  let alta_consulta_completa = async(e) => {
+
+  let alta_consulta_completa = async (e) => {
     e.preventDefault();
     try {
-      const resultado=await alta_consulta_y_diagnostico(sintomasConsulta,observacionConsulta,fechaConsulta,turnoElegido,observacionDiagnostico,descripcionDiagnostico,enfermedad,persona.historia_clinica)
-      console.log("resultado = "+resultado);
+      const resultado = await alta_consulta_y_diagnostico(sintomasConsulta, observacionConsulta, fechaConsulta, turnoElegido, observacionDiagnostico, descripcionDiagnostico, enfermedad, persona.historia_clinica)
+      console.log("resultado = " + resultado);
       setMessages(['consulta y diagonostico creados exitosamente.'])
     } catch (error) {
       setErrors([error.message]);
@@ -56,100 +56,118 @@ const Datos_consulta_y_diagnostico = ({ state }) => {
   return (
     <form onSubmit={alta_consulta_completa}>
       <div className="row">
-        <div class="form-floating mb-3 w-50">
-          <select
-            class="form-select"
-            id="turnos"
-            aria-label="Seleccion de turnos"
-            value={turnoElegido}
-            onChange={(e) => {setTurnoElegido(e.target.value)
-              const fechaSeleccionada = e.target.options[e.target.selectedIndex].getAttribute("data-fecha");
-              setFechaConsulta(fechaSeleccionada);}}
-            required
-          >
-            <option value="">
-              Seleccioná una opción
-            </option>
-            {turnos.map((turno) => (
-              
-              <option key={turno._id} value={turno._id} data-fecha={turno.fecha}>{(new Date(turno.fecha)).toLocaleDateString()} {turno.hora}</option>
-            ))}
-          </select>
-          <label for="turnoElegido">seleccionar turno</label>
-        
-            <div className="form-floating mb-3 mt-3 w-100">
-              <input
-                type="text"
-                className="form-control"
-                id=""
-                onChange={(e) =>  setSintomasConsulta(e.target.value)
-                 }
-                required
-              />
-              <label htmlFor="sintomas_consulta">sintomas de la consulta</label>
-            </div>
+        <div className="col-md-9">
+          <div class="form-floating mb-3">
+            <select
+              class="form-select"
+              id="turnos"
+              aria-label="Seleccion de turnos"
+              value={turnoElegido}
+              onChange={(e) => {
+                setTurnoElegido(e.target.value)
+                const fechaSeleccionada = e.target.options[e.target.selectedIndex].getAttribute("data-fecha");
+                setFechaConsulta(fechaSeleccionada);
+              }}
+              required
+            >
+              <option value="">
+                Selecciona una opción
+              </option>
+              {turnos.map((turno) => (
 
-            
-            <div className="form-floating mb-3 mt-3 w-100">
-              <input
-                type="text"
-                className="form-control"
-                id="observaciones_consulta"
-                onChange={(e) =>  setObservacionConsulta(e.target.value)}
-                required
-              />
-              <label htmlFor="observaciones_consulta">observaciones de la consulta</label>
-            </div>
-
-
-            <div className="form-floating mb-3 mt-3 w-100">
-              <input
-                type="text"
-                className="form-control"
-                id="observaciones_diagnostico"
-                onChange={(e) =>  setObservacionDiagnostico(e.target.value)}
-                required
-              />
-              <label htmlFor="observaciones_diagnostico">observaciones del diagnostico</label>
-            </div>
-
-            <div className="form-floating mb-3 mt-3 w-100">
-              <input
-                type="text"
-                className="form-control"
-                id="descripcion_diagnostico"
-                onChange={(e) =>  setDescripcionDiagnostico(e.target.value)}
-                required
-              />
-              <label htmlFor="descripcion_diagnostico">descripcion del diagnostico</label>
-            </div>
-            <div class="form-floating mb-3 w-100">
-          <select
-            class="form-select"
-            id="enfermedad"
-            aria-label="Seleccion de enfermedad"
-            value={enfermedad}
-            onChange={(e) => set_enfermedad(e.target.value)}
-            required
-          >
-            <option selected value="">
-              Seleccioná una opción
-            </option>
-            {enfermedades.map((enfermedad) => (
-              <option value={enfermedad._id}>{enfermedad.nombre}</option>
-            ))}
-          </select>
-          <label for="enfermedad">Enfermedad</label>
+                <option key={turno._id} value={turno._id} data-fecha={turno.fecha}>{(new Date(turno.fecha)).toLocaleDateString()} {turno.hora}</option>
+              ))}
+            </select>
+            <label forHtml="turnoElegido">Seleccionar Turno</label>
+          </div>
         </div>
-          <input
-    type="submit"
-    class="btn btn-primary mb-3"
-    value="guardar consuta y diagnostico"
-  />
-        </div>
-
-
       </div>
+
+      <div className="row">
+        <div className="col-md-9">
+          <div className="form-floating mb-3 mt-3">
+            <input
+              type="text"
+              className="form-control"
+              id=""
+              onChange={(e) => setSintomasConsulta(e.target.value)
+              }
+              required
+            />
+            <label htmlFor="sintomas_consulta">Síntomas de la Consulta</label>
+          </div>
+        </div>
+      </div>
+      <div className="row">
+        <div className="col-md-9">
+          <div className="form-floating mb-3 mt-3">
+            <input
+              type="text"
+              className="form-control"
+              id="observaciones_consulta"
+              onChange={(e) => setObservacionConsulta(e.target.value)}
+              required
+            />
+            <label htmlFor="observaciones_consulta">Observaciones de la Consulta</label>
+          </div>
+        </div>
+      </div><div className="row">
+        <div className="col-md-9">
+          <div className="form-floating mb-3 mt-3">
+            <input
+              type="text"
+              className="form-control"
+              id="observaciones_diagnostico"
+              onChange={(e) => setObservacionDiagnostico(e.target.value)}
+              required
+            />
+            <label htmlFor="observaciones_diagnostico">Observaciones del Diagnóstico</label>
+          </div>
+        </div>
+      </div><div className="row">
+        <div className="col-md-9">
+          <div className="form-floating mb-3 mt-3">
+            <input
+              type="text"
+              className="form-control"
+              id="descripcion_diagnostico"
+              onChange={(e) => setDescripcionDiagnostico(e.target.value)}
+              required
+            />
+            <label htmlFor="descripcion_diagnostico">Descripción del Diagnóstico</label>
+          </div>
+        </div>
+      </div>
+      <div className="row">
+        <div className="col-md-9">
+          <div className="form-floating mb-3">
+            <select
+              class="form-select"
+              id="enfermedad"
+              aria-label="Seleccion de enfermedad"
+              value={enfermedad}
+              onChange={(e) => set_enfermedad(e.target.value)}
+              required
+            >
+
+              <option value="">
+                Selecciona una opción
+              </option>
+              {enfermedades.map((enfermedad) => (
+                <option key={enfermedad._id} value={enfermedad._id}>{enfermedad.nombre}</option>
+              ))}
+            </select>
+            <label for="enfermedad">Enfermedad</label>
+          </div>
+
+        </div>
+      </div>
+
+      <input
+        type="submit"
+        class="btn btn-primary mb-3"
+        value="Guardar Consuta y Diagnóstico"
+      />
     </form>
   );
 };

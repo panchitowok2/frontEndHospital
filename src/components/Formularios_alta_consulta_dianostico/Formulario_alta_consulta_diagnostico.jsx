@@ -23,9 +23,9 @@ const Formulario_alta_consulta_diagnostico = () => {
   const [sexo, setSexo] = useState("");
   const [medicos, setMedicos] = useState([]);
   const [persona, setPersona] = useState("");
-  const [expandirmenu1, setexpandir1]=useState(false);
-  const [expandirmenu2, setexpandir2]=useState(true);
-  const [expandirmenu3, setexpandir3]=useState(true);
+  const [expandirmenu1, setexpandir1] = useState(false);
+  const [expandirmenu2, setexpandir2] = useState(true);
+  const [expandirmenu3, setexpandir3] = useState(true);
   const personaDatos = {
     tipoDocumento,
     setTipoDocumento,
@@ -51,12 +51,12 @@ const Formulario_alta_consulta_diagnostico = () => {
   const [turnos, setTurnos] = useState([]);
   const [turnoElegido, setTurnoElegido] = useState("");
 
-  const datos_turno={
+  const datos_turno = {
     persona,
     fechaTurno,
-    hora1,sethora1
-    ,hora2,sethora2,
-    medico,setTurnos,
+    hora1, sethora1
+    , hora2, sethora2,
+    medico, setTurnos,
     setErrors,
     setFechaTurno,
     setMedico,
@@ -68,9 +68,9 @@ const Formulario_alta_consulta_diagnostico = () => {
 
   const { isAuthenticated } = useAuth0();
 
-;
+  ;
 
-  
+
   const [sintomasConsulta, setSintomasConsulta] = useState("");
   const [observacionConsulta, setObservacionConsulta] = useState("");
   const [fechaConsulta, setFechaConsulta] = useState("");
@@ -79,22 +79,22 @@ const Formulario_alta_consulta_diagnostico = () => {
   const [enfermedades, set_enfermedades] = useState([]);
   const [enfermedad, set_enfermedad] = useState("");
   const [historiaClinica, setHistoriaClinica] = useState("");
-  const datos_consulta_diagnostico={
+  const datos_consulta_diagnostico = {
     sintomasConsulta,
     setSintomasConsulta,
-    observacionConsulta, 
+    observacionConsulta,
     setObservacionConsulta,
-    fechaConsulta, 
+    fechaConsulta,
     setFechaConsulta,
-    observacionDiagnostico, 
+    observacionDiagnostico,
     setObservacionDiagnostico,
-    descripcionDiagnostico, 
+    descripcionDiagnostico,
     setDescripcionDiagnostico,
-    enfermedades, 
+    enfermedades,
     set_enfermedades,
-    enfermedad, 
+    enfermedad,
     set_enfermedad,
-    historiaClinica, 
+    historiaClinica,
     setHistoriaClinica,
     turnoElegido,
     setTurnoElegido,
@@ -103,10 +103,10 @@ const Formulario_alta_consulta_diagnostico = () => {
     setErrors,
     persona,
     setMessages,
- 
+
   }
 
-  
+
 
 
 
@@ -118,14 +118,17 @@ const Formulario_alta_consulta_diagnostico = () => {
     return <h1> No estas logeado </h1>;
   }
 
-  
+
 
   return (
-    <div className="m-3 footerSiempreAbajo"> 
-    <Mensajes_Exito messages={messages} />
+    <div className="m-3 footerSiempreAbajo">
+      <Mensajes_Exito messages={messages} />
       <Error_General errors={errors} />
 
-      <h1 className="fs-2 mb-3"> Registrar Consulta y Diagnostico</h1>
+      <h1 className="fs-2">
+        <i className="me-2 bi bi-pen"></i>
+        Registrar Consulta y Diagnostico
+      </h1>
 
       <div className="row">
         <div className="col-md ">
@@ -166,7 +169,7 @@ const Formulario_alta_consulta_diagnostico = () => {
                   aria-expanded="true"
                   aria-controls="seleccionarMedicoFecha"
                 >
-                  2. Seleccionar un medico y fecha
+                  2. Seleccionar un Médico y Fecha
                 </button>
               </h2>
 
@@ -176,12 +179,12 @@ const Formulario_alta_consulta_diagnostico = () => {
                 aria-labelledby="headingTwo"
               >
                 <div className="accordion-body">
-                  
 
 
 
 
-                  <Seleccionar_medico_fecha_y_hora state={datos_turno}/>
+
+                  <Seleccionar_medico_fecha_y_hora state={datos_turno} />
 
                 </div>
               </div>
@@ -197,7 +200,7 @@ const Formulario_alta_consulta_diagnostico = () => {
                   aria-expanded="true"
                   aria-controls="datosConsultaDiagnostico"
                 >
-                  3. Datos del consulta y diagnostico
+                  3. Datos de Consulta y Diagnóstico
                 </button>
               </h2>
               <div
@@ -206,7 +209,7 @@ const Formulario_alta_consulta_diagnostico = () => {
                 aria-labelledby="headingThree"
               >
                 <div className="accordion-body">
-                  <Datos_consulta_y_diagnostico state={datos_consulta_diagnostico}/>
+                  <Datos_consulta_y_diagnostico state={datos_consulta_diagnostico} />
                 </div>
               </div>
             </div>

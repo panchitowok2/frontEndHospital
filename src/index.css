@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Nunito');
+
 body {
   font-family: 'Nunito';
   margin: 0;
@@ -11,11 +12,13 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
 html {
   font-family: 'Nunito';
   min-height: 100%;
   position: relative;
 }
+
 .flex-container {
   display: flex;
 }
@@ -45,3 +48,34 @@ html {
   color: white;
 }
 
+.overlay {
+  position: relative;
+  background-color: transparent;
+  background-image: url("../src/fondo.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: top;
+  opacity: 0.95;
+  height: 100vh;
+}
+
+.overlay::before {
+  position: absolute;
+  content: '';
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0);
+}
+
+.text {
+  position: absolute;
+  width: 100%;
+  top: 50%;
+  left: 50%;
+  font-size: 50px;
+  color: white;
+  transform: translate(-50%, -50%);
+}
