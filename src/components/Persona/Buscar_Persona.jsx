@@ -69,11 +69,11 @@ const Buscar_Persona = ({ state }) => {
       <div className="row">
         <div className="col-md-6"> 
           <div className="form-floating">
-            <select className="form-select" id="tipoDocumento" aria-label="Floating label select example" onChange={(e) => setTipoDocumento(e.target.value)} required>
-              <option value=""> Seleccione una opción </option>
-              <option value="DNI">DNI - Documento Nacional de Identidad</option>
-              <option value="LI">LC - Libreta Cívica</option>
-              <option value="LE">LE - Libreta de Enrolamiento</option>
+            <select className="form-select" data-testid="select-tipodoc" id="tipoDocumento" aria-label="Floating label select example" onChange={(e) => setTipoDocumento(e.target.value)} required>
+              <option data-testid="select-option" value=""> Seleccione una opción </option>
+              <option data-testid="select-option" value="DNI">DNI - Documento Nacional de Identidad</option>
+              <option data-testid="select-option" value="LI">LC - Libreta Cívica</option>
+              <option data-testid="select-option" value="LE">LE - Libreta de Enrolamiento</option>
             </select>
             <label htmlFor="tipoDocumento">Tipo de documento</label>
           </div>
@@ -81,7 +81,7 @@ const Buscar_Persona = ({ state }) => {
 
         <div className="col-md-6 mt-0 mt-3 mt-md-0">
           <div className="form-floating mb-3">
-            <input type="number" className="form-control" id="documento" onChange={(e) => setDocumento(e.target.value)} required/>
+            <input type="number" data-testid="input-numdoc" className="form-control" id="documento" onChange={(e) => setDocumento(e.target.value)} required/>
             <label htmlFor="documento">Número de documento</label>
           </div>
         </div>

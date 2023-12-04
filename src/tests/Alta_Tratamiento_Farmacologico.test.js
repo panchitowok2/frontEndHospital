@@ -1,4 +1,4 @@
-import { render, screen, waitFor } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import Formulario_Alta_Tratamiento_Farmacologico from '../components/Formulario_Alta_Tratamiento_Farmacologico/Formulario_Alta_Tratamiento_Farmacologico';
 import { useAuth0 } from "@auth0/auth0-react";
 
@@ -15,12 +15,36 @@ describe("Componente alta tratamiento farmacológico", () => {
     jest.clearAllMocks();
   });
 
-  test('El componente se renderiza correctamente', async () => {
+  test('Testeamos las funcionalidades del componente', async () => {
 
     render(<Formulario_Alta_Tratamiento_Farmacologico />);
 
-    const linkElement = screen.getByText(/Alta de Tratamiento Farmacológico/i);
-    expect(linkElement).toBeInTheDocument();
+    // Seleccionamos el tipo de documento
+    const selectorTipoDoc = screen.getByTestId('select-tipodoc');
+    expect(selectorTipoDoc).toBeInTheDocument();
+    expect(selectorTipoDoc?.tagName).toBe('SELECT');
+    fireEvent.change(selectorTipoDoc, { target: { value: 'DNI' } })
+    let options = screen.getAllByTestId('select-option')
+    expect(options[0].selected).toBeFalsy();
+    expect(options[1].selected).toBeTruthy();
+    expect(options[2].selected).toBeFalsy();
+    expect(options[3].selected).toBeFalsy();
+
+    //seleccionamos el numero de documento
+    const inputNumeroDoc = screen.getByTestId('input-numdoc')
+    expect(inputNumeroDoc?.tagName).toBe('INPUT')
+    fireEvent.change(inputNumeroDoc, { target: { value: 39650255 } })
+
+    //seleccionamos apelllido
+    const inputApellido = screen.getByLabelText(/apellido/i)
+    expect(inputApellido?.tagName).toBe('INPUT')
+    fireEvent.change(inputApellido, { target: { value: 'Fabi' } })
+
+    //seleccionamos el sexo
+    const inputSexo = screen.getByLabelText(/masculino/i)
+    expect(inputSexo?.tagName).toBe('INPUT')
+    fireEvent.click(inputSexo)
+    expect(inputSexo).toBeChecked()
   });
-  
+
 });
