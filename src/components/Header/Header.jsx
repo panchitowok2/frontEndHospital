@@ -83,7 +83,7 @@ function Header() {
 
                   <Link to="/contacto" className='nav-link text-white'>Contactános</Link>
                 </li>
-                <li className="nav-item">
+                <li className="nav-item d-md-none">
                   <a className="nav-link text-white" href='#' onClick={() => loginWithRedirect()}>Iniciar sesión</a>
                 </li>
               </React.Fragment>
