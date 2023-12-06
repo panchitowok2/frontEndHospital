@@ -1,20 +1,24 @@
+import { server } from 'msw/node';
 import { render, screen, fireEvent } from '@testing-library/react';
 import Formulario_Alta_Tratamiento_Farmacologico from '../components/Formulario_Alta_Tratamiento_Farmacologico/Formulario_Alta_Tratamiento_Farmacologico';
 import { useAuth0 } from "@auth0/auth0-react";
 
 jest.mock("@auth0/auth0-react");
 
+beforeAll(() => server.listen());
+afterAll(() => server.close());
+beforeEach(() => {
+  useAuth0.mockReturnValue({
+    isAuthenticated: true,
+  });
+});
+
+afterEach(() => {
+  jest.clearAllMocks();
+  server.resetHandlers()
+});
 describe("Componente alta tratamiento farmacológico", () => {
-  beforeEach(() => {
-    useAuth0.mockReturnValue({
-      isAuthenticated: true,
-    });
-  });
-
-  afterEach(() => {
-    jest.clearAllMocks();
-  });
-
+  
   test('Testeamos las funcionalidades del componente', async () => {
 
     render(<Formulario_Alta_Tratamiento_Farmacologico />);
@@ -45,6 +49,14 @@ describe("Componente alta tratamiento farmacológico", () => {
     expect(inputSexo?.tagName).toBe('INPUT')
     fireEvent.click(inputSexo)
     expect(inputSexo).toBeChecked()
+
+    //buscamos la persona
+    const botonBuscar = screen.getByText(/buscar/i)
+    expect(botonBuscar?.tagName).toBe('BUTTON')
+    fireEvent.click(botonBuscar)
+    const mensajeError = screen.getByText(/error/i) 
+    expect(mensajeError).toBeInTheDocument()
+
   });
 
 });
